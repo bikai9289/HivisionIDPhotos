@@ -28,3 +28,11 @@ test/temp/*
 # Ignore .png and .jpg files in the root directory
 /*.png
 /*.jpg
+
+# Supervisor logs and configs
+supervisord.log
+supervisord.pid
+supervisor.sock
+hivision_stdout.log
+hivision_stderr.log
+supervisord.conf
