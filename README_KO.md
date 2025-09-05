@@ -1,7 +1,7 @@
 <div align="center">
 
 <img alt="hivision_logo" src="assets/hivision_logo.png" width=120 height=120>
-<h1>HivisionIDPhoto</h1>
+<h1>AI IDPhotos</h1>
 
 [English](README_EN.md) / [中文](README.md) / [日本語](README_JP.md) / 한국어
 

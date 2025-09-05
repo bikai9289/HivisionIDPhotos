@@ -34,7 +34,7 @@ FACE_DETECT_MODEL = [
 ]
 RENDER = [0, 1, 2]
 
-parser = argparse.ArgumentParser(description="HivisionIDPhotos 证件照制作推理程序。")
+parser = argparse.ArgumentParser(description="AI IDPhotos 证件照制作推理程序。")
 parser.add_argument(
     "-t",
     "--type",

@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# SEO优化指令
+Disallow: /gradio_cached_examples/
+Disallow: /tmp/
+Disallow: /.git/
+Disallow: /hivision/creator/weights/
+Disallow: /demo/images/
+
+# Sitemap位置
+Sitemap: https://7860-inxx0p1bgz3fp6r98vuvg-6532622b.e2b.dev/sitemap.xml
+
+# 爬虫友好设置
+Crawl-delay: 1
+
+# 针对特定搜索引擎的优化
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /

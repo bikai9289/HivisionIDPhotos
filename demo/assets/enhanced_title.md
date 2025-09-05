@@ -1,85 +1,24 @@
-# 🆔 AI智能证件照制作工具 | AI IDPhotos
+# 🆔 AI智能证件照制作工具 | HivisionIDPhoto
 
-<!-- 宽屏优化的头部区域 -->
-<div style="max-width: 1400px; margin: 0 auto; padding: 40px 20px;">
-  
-  <!-- 主标题区域 -->
-  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-bottom: 40px;">
-    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-      <img src="https://swanhub.co/git/repo/ZeYiLin%2FHivisionIDPhotos/file/preview?ref=master&path=assets/hivision_logo.png" alt="AI IDPhotos - AI智能证件照制作工具" style="width: 65px; height: 65px; margin-right: 15px;" onerror="this.style.display='none';" loading="lazy">
-      <div style="font-size: 48px;">
-        <b style="color: #6e9abb;">AI IDPhotos</b><span style="font-size: 20px; color: #638fb3; margin-left: 15px;"> v2.0</span>
-      </div>
-    </div>
-    
-    <div style="font-size: 28px; color: #2c3e50; margin-bottom: 15px; line-height: 1.4;">
-      <strong>🎯 专业AI证件照制作 | 免费 • 离线 • 安全</strong>
-    </div>
-    
-    <div style="font-size: 18px; color: #7f8c8d; max-width: 1000px; line-height: 1.6;">
-      支持护照照、签证照、身份证照等多种规格 | 一键智能抠图 | 3秒生成专业证件照
-    </div>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; font-size: 40px;">
+  <div style="display: flex; align-items: center;">
+    <img src="https://swanhub.co/git/repo/ZeYiLin%2FHivisionIDPhotos/file/preview?ref=master&path=assets/hivision_logo.png" alt="HivisionIDPhotos - AI智能证件照制作工具" style="width: 65px; height: 65px; margin-right: 10px;" onerror="this.style.display='none';" loading="lazy">
+    <b style="color: #6e9abb;">HivisionIDPhotos</b><span style="font-size: 18px; color: #638fb3; margin-left: 10px;"> v1.3.1</span>
   </div>
   
-  <!-- 横向布局的功能特色 -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 50px 0;">
-    
-    <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52); color: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
-      <div style="font-size: 48px; margin-bottom: 15px;">🎯</div>
-      <h3 style="margin-bottom: 15px; font-size: 20px;">一键智能抠图</h3>
-      <p style="opacity: 0.9; line-height: 1.6; margin: 0;">AI自动识别人像轮廓，精准去除背景，无需手动操作，3秒完成专业抠图。</p>
-    </div>
-
-    <div style="background: linear-gradient(135deg, #4dabf7, #339af0); color: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
-      <div style="font-size: 48px; margin-bottom: 15px;">📏</div>
-      <h3 style="margin-bottom: 15px; font-size: 20px;">多种规格预设</h3>
-      <p style="opacity: 0.9; line-height: 1.6; margin: 0;">支持护照、签证、身份证等195+国家标准尺寸，一键选择正确规格。</p>
-    </div>
-
-    <div style="background: linear-gradient(135deg, #69db7c, #51cf66); color: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
-      <div style="font-size: 48px; margin-bottom: 15px;">🔒</div>
-      <h3 style="margin-bottom: 15px; font-size: 20px;">隐私保护</h3>
-      <p style="opacity: 0.9; line-height: 1.6; margin: 0;">纯本地处理，图片不上传服务器，符合GDPR等国际隐私标准。</p>
-    </div>
-
-    <div style="background: linear-gradient(135deg, #ffd93d, #ff9f40); color: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
-      <div style="font-size: 48px; margin-bottom: 15px;">✨</div>
-      <h3 style="margin-bottom: 15px; font-size: 20px;">智能美颜</h3>
-      <p style="opacity: 0.9; line-height: 1.6; margin: 0;">自动优化光线和肤色，保持自然真实的同时提升照片质量。</p>
-    </div>
-
-  </div></div>
+  <div style="font-size: 24px; color: #2c3e50; margin: 20px 0; line-height: 1.4;">
+    <strong>🎯 专业AI证件照制作 | 免费 • 离线 • 安全</strong>
+  </div>
   
-  <!-- 信任统计 -->
-  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px 15px; border-radius: 15px; margin: 20px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.15);">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px;">
-      <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; backdrop-filter: blur(10px);">
-        <div style="font-size: 24px; font-weight: bold; margin-bottom: 5px;" id="trust-users">2,150,000+</div>
-        <div style="font-size: 12px; opacity: 0.9;">全球用户</div>
-      </div>
-      <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; backdrop-filter: blur(10px);">
-        <div style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">98.7%</div>
-        <div style="font-size: 12px; opacity: 0.9;">成功通过率</div>
-      </div>
-      <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; backdrop-filter: blur(10px);">
-        <div style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">4.9/5</div>
-        <div style="font-size: 12px; opacity: 0.9;">用户评分</div>
-      </div>
-      <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; backdrop-filter: blur(10px);">
-        <div style="font-size: 24px; font-weight: bold; margin-bottom: 5px;">195+</div>
-        <div style="font-size: 12px; opacity: 0.9;">支持国家</div>
-      </div>
-    </div>
-    <div style="text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.9;">
-      🔥 <span id="today-users">12,856</span> 人今日使用 | 🛡️ 100% 隐私保护 | ⚡ 平均处理时间 3.2秒
-    </div>
+  <div style="font-size: 16px; color: #7f8c8d; margin-bottom: 20px; max-width: 800px; line-height: 1.6;">
+    支持护照照、签证照、身份证照等多种规格 | 一键智能抠图 | 3秒生成专业证件照
   </div>
   
   <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 20px;">
-      <a href="https://github.com/zeyi-lin/hivisionidphotos"><img alt="GitHub" src="https://img.shields.io/static/v1?label=GitHub&message=开源项目&color=black&style=for-the-badge" onerror="this.style.display='none';"></a> &ensp;
-      <a href="https://github.com/zeyi-lin/hivisionidphotos/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/zeyi-lin/hivisionidphotos?color=ffcb47&labelColor=black&style=for-the-badge" onerror="this.style.display='none';"></a> &ensp;
-      <a href="https://swanlab.cn?utm_source=ai_idphotos_demo"><img alt="SwanLab" src="https://img.shields.io/badge/Training%20by-SwanLab-4cb55e&style=for-the-badge" onerror="this.style.display='none';"></a> &ensp;
-      <a href="https://github.com/zeyi-lin/hivisionidphotos/blob/master/docs/api_CN.md" target="_blank"><img alt="API文档" src="https://img.shields.io/badge/API_Docs-API文档-315bce&style=for-the-badge" onerror="this.style.display='none';"></a>
+      <a href="https://github.com/xiaolin199912/HivisionIDPhotos"><img alt="GitHub" src="https://img.shields.io/static/v1?label=GitHub&message=开源项目&color=black&style=for-the-badge" onerror="this.style.display='none';"></a> &ensp;
+      <a href="https://github.com/xiaolin199912/HivisionIDPhotos/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/zeyi-lin/hivisionidphotos?color=ffcb47&labelColor=black&style=for-the-badge" onerror="this.style.display='none';"></a> &ensp;
+      <a href="https://swanlab.cn?utm_source=hivision_demo"><img alt="SwanLab" src="https://img.shields.io/badge/Training%20by-SwanLab-4cb55e&style=for-the-badge" onerror="this.style.display='none';"></a> &ensp;
+      <a href="https://github.com/Zeyi-Lin/HivisionIDPhotos/blob/master/docs/api_CN.md" target="_blank"><img alt="API文档" src="https://img.shields.io/badge/API_Docs-API文档-315bce&style=for-the-badge" onerror="this.style.display='none';"></a>
   </div>
 </div>
 
