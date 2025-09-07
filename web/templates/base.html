@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}" />
+    <link rel="canonical" href="{{ canonical }}" />
+    <link rel="alternate" href="{{ base_url }}/" hreflang="zh-CN" />
+    <link rel="alternate" href="{{ base_url }}/en" hreflang="en" />
+    <link rel="alternate" href="{{ base_url }}/" hreflang="x-default" />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:url" content="{{ canonical }}" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ title }}" />
+    <meta name="twitter:description" content="{{ description }}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "HivisionIDPhotos",
+      "applicationCategory": "PhotoEditor",
+      "operatingSystem": "Web",
+      "url": "{{ base_url }}",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" role="banner">
+      <div class="container row between center">
+        <a class="brand" href="/" aria-label="HivisionIDPhotos Home">HivisionIDPhotos</a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="/#features">功能</a>
+          <a href="/#howto">使用步骤</a>
+          <a href="/spec/one-inch-photo">规格尺寸</a>
+          <a class="btn ghost" href="/tool">开始使用</a>
+        </nav>
+      </div>
+    </header>
+
+    {% block body %}{% endblock %}
+
+    <footer class="site-footer">
+      <div class="container small">
+        <div>© {{ now.year }} HivisionIDPhotos</div>
+        <div class="muted"><a href="/en">English</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

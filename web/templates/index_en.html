@@ -1,0 +1,71 @@
+{% set base_url = (request.headers.get('x-forwarded-proto', 'http') + '://' + request.headers.get('host')) %}
+{% extends "base.html" %}
+{% set lang = 'en' %}
+{% set title = 'AI ID Photo Maker (Background Remover) | HivisionIDPhotos' %}
+{% set description = 'Create ID/Passport photos online: auto background removal, white/red/blue background, smart crop, multi-country sizes, sheet layout.' %}
+{% set canonical = base_url + '/en' %}
+
+{% block body %}
+<section class="hero" id="top">
+  <div class="container">
+    <h1>AI ID Photos: Remove background, change colors and fit sizes</h1>
+    <p class="lead">Minimal, fast, SEO‑friendly pages inspired by remove.bg.</p>
+    <div class="hero-ctas">
+      <a class="btn primary" href="/tool" aria-label="Open the editor">Get Started</a>
+      <a class="btn ghost" href="#howto" aria-label="See how it works">How it works</a>
+    </div>
+  </div>
+</section>
+
+<main id="main" class="container" role="main">
+  <section id="features" aria-label="Features">
+    <div class="grid">
+      <div class="card"><h3>Background</h3><p>White/Red/Blue/Gray; custom RGB/HEX.</p></div>
+      <div class="card"><h3>Size Presets</h3><p>1-inch/2-inch/Passport/Visa, global standards.</p></div>
+      <div class="card"><h3>Quality</h3><p>Whitening, brightness/contrast/sharpen; DPI & KB control.</p></div>
+      <div class="card"><h3>API</h3><p>Backend <code>/api</code> for matting/crop/layout.</p></div>
+    </div>
+  </section>
+
+  <section style="margin-top:24px">
+    <div class="grid list-links">
+      <a class="card" href="/en/spec/us-passport-photo">US Passport Photo</a>
+      <a class="card" href="/en/spec/japan-visa-photo">Japan Visa Photo</a>
+      <a class="card" href="/en/spec/one-inch-photo">1-inch ID Photo</a>
+      <a class="card" href="/en/spec/two-inch-photo">2-inch ID Photo</a>
+      <a class="card" href="/en/spec/change-background-white">Change Background to White</a>
+      <a class="card" href="/en/spec/change-background-red">Change Background to Red</a>
+    </div>
+  </section>
+
+  <section id="howto" style="margin-top:28px" aria-label="How it works">
+    <div class="howto">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step"><strong>1. Upload</strong><p>Use a sample or your photo.</p></div>
+        <div class="step"><strong>2. Choose size/background</strong><p>Preset or custom mm/px, colors.</p></div>
+        <div class="step"><strong>3. Enhance & layout</strong><p>Optional whitening/sharpen and 6-inch sheet.</p></div>
+        <div class="step"><strong>4. Export</strong><p>Set DPI/KB; export PNG/JPG.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:28px" aria-label="FAQ">
+    <div class="card">
+      <h2>FAQ</h2>
+      <p><strong>Privacy?</strong> Local deploy supported; images are processed in-session.</p>
+      <p><strong>How to use?</strong> Click Get Started, upload a photo and select size/background.</p>
+    </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Privacy?", "acceptedAnswer": {"@type": "Answer", "text": "Local deploy supported; images are processed in-session."}},
+        {"@type": "Question", "name": "How to use?", "acceptedAnswer": {"@type": "Answer", "text": "Click Get Started, upload a photo and select size/background."}}
+      ]
+    }
+    </script>
+  </section>
+</main>
+{% endblock %}

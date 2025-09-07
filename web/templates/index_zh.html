@@ -1,0 +1,72 @@
+{% set base_url = (request.headers.get('x-forwarded-proto', 'http') + '://' + request.headers.get('host')) %}
+{% extends "base.html" %}
+{% set lang = 'zh-CN' %}
+{% set title = 'AI证件照换底色与规格生成 | HivisionIDPhotos' %}
+{% set description = '在线一键制作证件照：自动抠图、换白/红/蓝底，智能裁剪，支持多国/多机构规格与排版，隐私本地处理。' %}
+{% set canonical = base_url + '/' %}
+
+{% block body %}
+<section class="hero" id="top">
+  <div class="container">
+    <h1>AI 证件照：一键抠图、换底色与合规尺寸</h1>
+    <p class="lead">参考 remove.bg 的极简体验与速度，输出可被搜索引擎收录的静态页面。</p>
+    <div class="hero-ctas">
+      <a class="btn primary" href="/tool" aria-label="开始使用工具">立即开始制作</a>
+      <a class="btn ghost" href="#howto" aria-label="查看使用步骤">查看使用步骤</a>
+    </div>
+  </div>
+</section>
+
+<main id="main" class="container" role="main">
+  <section id="features" aria-label="功能亮点">
+    <div class="grid">
+      <div class="card"><h3>去背景/换底</h3><p>白/红/蓝/灰，支持自定义颜色（RGB/HEX）。</p></div>
+      <div class="card"><h3>规格库</h3><p>一寸/二寸/护照/签证/考试照，覆盖多国标准。</p></div>
+      <div class="card"><h3>画质优化</h3><p>美白、亮度/对比度/锐化，DPI 与 KB 控制。</p></div>
+      <div class="card"><h3>API 接口</h3><p>后端 <code>/api</code> 提供抠图/裁剪/排版能力。</p></div>
+    </div>
+  </section>
+
+  <section style="margin-top:24px">
+    <div class="grid list-links">
+      <a class="card" href="/spec/us-passport-photo">美国护照照片规格</a>
+      <a class="card" href="/spec/japan-visa-photo">日本签证照片尺寸</a>
+      <a class="card" href="/spec/one-inch-photo">一寸证件照尺寸</a>
+      <a class="card" href="/spec/two-inch-photo">二寸证件照尺寸</a>
+      <a class="card" href="/spec/change-background-white">证件照换白底</a>
+      <a class="card" href="/spec/change-background-red">证件照换红底</a>
+    </div>
+  </section>
+
+  <section id="howto" style="margin-top:28px" aria-label="使用步骤">
+    <div class="howto">
+      <h2>如何使用</h2>
+      <div class="steps">
+        <div class="step"><strong>1. 上传照片</strong><p>使用示例或本地图片。</p></div>
+        <div class="step"><strong>2. 选择尺寸/底色</strong><p>预设或自定义 mm/px、背景色。</p></div>
+        <div class="step"><strong>3. 美化与排版</strong><p>可选美白/锐化与六寸拼版。</p></div>
+        <div class="step"><strong>4. 导出</strong><p>设置 DPI/KB，导出 PNG/JPG。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:28px" aria-label="常见问题">
+    <div class="card">
+      <h2>常见问题</h2>
+      <p><strong>是否支持本地/隐私？</strong> 支持。图片在会话内处理，可本地部署。</p>
+      <p><strong>如何使用？</strong> 点击“立即开始制作”，上传照片并选择规格/底色。</p>
+    </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "是否支持本地/隐私？", "acceptedAnswer": {"@type": "Answer", "text": "支持。图片在会话内处理，可本地部署。"}},
+        {"@type": "Question", "name": "如何使用？", "acceptedAnswer": {"@type": "Answer", "text": "点击‘立即开始制作’，上传照片并选择规格/底色。"}}
+      ]
+    }
+    </script>
+  </section>
+</main>
+{% endblock %}
+

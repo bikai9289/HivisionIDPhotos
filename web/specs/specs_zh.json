@@ -1,0 +1,80 @@
+[
+  {
+    "slug": "us-passport-photo",
+    "title": "美国护照照片规格（尺寸/像素/背景）| 在线合规制作",
+    "h1": "美国护照照片规格",
+    "subtitle": "51x51 毫米（2x2 英寸），白色背景，无阴影",
+    "description": "美国护照照片标准：51x51 毫米（2x2 英寸），头顶到下巴 25-35 毫米，纯白背景，近六个月内拍摄。在线一键制作并下载。",
+    "topic": "US Passport Photo Requirements",
+    "sections": [
+      {"heading": "尺寸与像素", "body": "成品尺寸 51x51 mm；300 DPI 时推荐像素 600x600 到 1200x1200。"},
+      {"heading": "头部比例", "body": "头顶至下巴高度应占图像 50%-69%（约 25-35 mm）。"},
+      {"heading": "背景与光线", "body": "纯白背景，均匀光线，无阴影、无美颜滤镜。"}
+    ],
+    "tips": ["点击‘立即开始制作’，选择白底和 2x2 英寸。", "如需排版，选择六寸排版下载打印。"]
+  },
+  {
+    "slug": "japan-visa-photo",
+    "title": "日本签证照片尺寸与要求 | 在线合规制作",
+    "h1": "日本签证照片尺寸",
+    "subtitle": "45x35 毫米，浅色/白色背景，正面免冠",
+    "description": "日本签证照片常见尺寸 45x35 毫米，近六个月，白色或浅色背景。在线自动裁剪与换底色。",
+    "topic": "Japan Visa Photo Requirements",
+    "sections": [
+      {"heading": "尺寸与像素", "body": "45x35 mm；300 DPI 时约 531x413 像素。"},
+      {"heading": "背景", "body": "白色或浅色背景，避免阴影与强反光。"},
+      {"heading": "表情与配饰", "body": "自然表情，无遮挡；普通眼镜建议摘除以防反光。"}
+    ],
+    "tips": ["选择预设尺寸 45x35 mm 并设置白底/浅色。"]
+  },
+  {
+    "slug": "one-inch-photo",
+    "title": "一寸证件照尺寸（像素/毫米）与换底 | 在线制作",
+    "h1": "一寸证件照尺寸",
+    "subtitle": "25x35 毫米，常用像素 295x413（300DPI）",
+    "description": "一寸证件照标准 25x35 毫米，300DPI 时常用 295x413 像素。支持白/红/蓝背景与 KB/DPI 控制。",
+    "topic": "1-inch ID Photo Size",
+    "sections": [
+      {"heading": "尺寸换算", "body": "25x35 mm ≈ 295x413 像素（300 DPI）。"},
+      {"heading": "背景颜色", "body": "常见为白、红、蓝；可自定义 RGB/HEX。"}
+    ],
+    "tips": ["在‘尺寸列表’里选择一寸并设置背景色。"]
+  },
+  {
+    "slug": "two-inch-photo",
+    "title": "二寸证件照尺寸（像素/毫米）与换底 | 在线制作",
+    "h1": "二寸证件照尺寸",
+    "subtitle": "35x49 毫米，常用像素 413x579（300DPI）",
+    "description": "二寸证件照标准 35x49 毫米，300DPI 常用 413x579 像素。支持一键换底与六寸排版。",
+    "topic": "2-inch ID Photo Size",
+    "sections": [
+      {"heading": "尺寸换算", "body": "35x49 mm ≈ 413x579 像素（300 DPI）。"},
+      {"heading": "拍摄建议", "body": "正面、自然表情、背景单一，无明显阴影。"}
+    ],
+    "tips": ["选择二寸尺寸，勾选打印排版输出六寸拼版。"]
+  },
+  {
+    "slug": "change-background-white",
+    "title": "证件照换白底（在线去背景）| HivisionIDPhotos",
+    "h1": "证件照换白底",
+    "subtitle": "自动抠图，纯白背景，一键导出",
+    "description": "上传照片，自动抠图并换成白色背景；支持 DPI/KB、锐化与美白微调。",
+    "topic": "Change Photo Background to White",
+    "sections": [
+      {"heading": "合规与适用", "body": "适用于多数证件照要求的白底背景，如护照/签证/考试照片。"},
+      {"heading": "使用步骤", "body": "上传→选择‘只换底’→白色→导出 PNG/JPG。"}
+    ]
+  },
+  {
+    "slug": "change-background-red",
+    "title": "证件照换红底（在线去背景）| HivisionIDPhotos",
+    "h1": "证件照换红底",
+    "subtitle": "自动抠图与红底渲染，支持 HEX 自定义",
+    "description": "常用于求职/证件照场景的红色背景，一键生成。支持 HEX 自定义偏红色。",
+    "topic": "Change Photo Background to Red",
+    "sections": [
+      {"heading": "颜色建议", "body": "建议使用纯色 #FF0000 或机构指定色值。"},
+      {"heading": "排版与打印", "body": "完成后可选择六寸排版以便相纸打印。"}
+    ]
+  }
+]

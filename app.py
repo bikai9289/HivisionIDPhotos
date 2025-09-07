@@ -76,4 +76,5 @@ if __name__ == "__main__":
         favicon_path=os.path.join(root_dir, "assets/hivision_logo.png"),
         root_path=args.root_path,
         show_api=False,
+        share=False,
     )

@@ -43,14 +43,34 @@ def create_ui(
     if DEFAULT_FACE_DETECT_MODEL not in face_detect_models:
         DEFAULT_FACE_DETECT_MODEL = "mtcnn"
 
-    demo = gr.Blocks(title="HivisionIDPhotos")
+    # Theme and custom CSS (blue primary)
+    try:
+        theme = gr.themes.Soft(primary_hue="blue", neutral_hue="slate").set(
+            body_background_fill="#fafafa",
+            radius_md="12px",
+            shadow_drop="0 6px 20px rgba(16,24,40,.06)",
+            button_primary_background_fill="#2563eb",
+            button_primary_background_fill_hover="#1d4ed8",
+            button_primary_text_color="#ffffff",
+        )
+    except Exception:
+        theme = None
+
+    css_path = os.path.join(root_dir, "demo/assets/ui.css")
+    css_text = ""
+    if os.path.exists(css_path):
+        with open(css_path, "r", encoding="utf-8") as _f:
+            css_text = _f.read()
+
+    demo = gr.Blocks(title="HivisionIDPhotos", theme=theme, css=css_text)
 
     with demo:
         gr.HTML(load_description(os.path.join(root_dir, "demo/assets/title.md")))
         with gr.Row():
             # ------------------------ 左半边 UI ------------------------
-            with gr.Column():
-                img_input = gr.Image(height=400)
+            with gr.Column(scale=7, elem_id="left_panel"):
+                empty_hint = gr.Markdown("**开始制作证件照（3 步）**  \\n+1) 上传或选择示例图  2) 选择尺寸/底色  3) 点击“开始制作”并下载", visible=True)
+                img_input = gr.Image(height=400, label=None, show_label=False)
 
                 with gr.Row():
                     # 语言选择器
@@ -85,6 +105,13 @@ def create_ui(
                             min_width=520,
                         )
                         
+                    # 快速预设（卡片）
+                    with gr.Row():
+                        preset_one_inch = gr.Button("一寸", size="sm")
+                        preset_two_inch = gr.Button("二寸", size="sm")
+                        preset_us_passport = gr.Button("美国护照 2x2", size="sm")
+                        preset_jp_visa = gr.Button("日本签证 45x35", size="sm")
+
                     # 尺寸列表
                     with gr.Row(visible=True) as size_list_row:
                         size_list_options = gr.Dropdown(
@@ -152,8 +179,8 @@ def create_ui(
                         )
 
                 # TAB2 - 高级参数 ------------------------------------------------
-                with gr.Tab(
-                    LOCALES["advance_param"][DEFAULT_LANG]["label"]
+                with gr.Accordion(
+                    LOCALES["advance_param"][DEFAULT_LANG]["label"], open=False
                 ) as advance_parameter_tab:
                     head_measure_ratio_option = gr.Slider(
                         minimum=0.1,
@@ -202,8 +229,8 @@ def create_ui(
                     )
 
                 # TAB3 - 美颜 ------------------------------------------------
-                with gr.Tab(
-                    LOCALES["beauty_tab"][DEFAULT_LANG]["label"]
+                with gr.Accordion(
+                    LOCALES["beauty_tab"][DEFAULT_LANG]["label"], open=False
                 ) as beauty_parameter_tab:
                     # 美白组件
                     whitening_option = gr.Slider(
@@ -255,8 +282,8 @@ def create_ui(
                     )
 
                 # TAB4 - 水印 ------------------------------------------------
-                with gr.Tab(
-                    LOCALES["watermark_tab"][DEFAULT_LANG]["label"]
+                with gr.Accordion(
+                    LOCALES["watermark_tab"][DEFAULT_LANG]["label"], open=False
                 ) as watermark_parameter_tab:
                     watermark_options = gr.Radio(
                         choices=LOCALES["watermark_switch"][DEFAULT_LANG]["choices"],
@@ -342,8 +369,8 @@ def create_ui(
                     )
                 
                 # TAB5 - 打印 ------------------------------------------------
-                with gr.Tab(
-                    LOCALES["print_tab"][DEFAULT_LANG]["label"]
+                with gr.Accordion(
+                    LOCALES["print_tab"][DEFAULT_LANG]["label"], open=False
                 ) as print_parameter_tab:
                     print_options = gr.Radio(
                         choices=LOCALES["print_switch"][DEFAULT_LANG]["choices"],
@@ -359,20 +386,78 @@ def create_ui(
                     variant="primary"
                 )
 
-                example_images = gr.Examples(
-                    inputs=[img_input],
-                    examples=[
-                        [path.as_posix()]
-                        for path in sorted(
-                            pathlib.Path(os.path.join(root_dir, "demo/images")).rglob(
-                                "*.jpg"
-                            )
-                        )
-                    ],
+                example_paths = [
+                    path.as_posix()
+                    for path in sorted(
+                        pathlib.Path(os.path.join(root_dir, "demo/images")).rglob("*.jpg")
+                    )
+                ]
+                examples_gallery = gr.Gallery(
+                    value=example_paths,
+                    label="Examples",
+                    columns=[5],
+                    height=160,
+                    allow_preview=False,
+                    elem_id="examples_gallery",
                 )
+                
+                def gallery_select(evt):
+                    return example_paths[evt.index]
+
+                examples_gallery.select(gallery_select, outputs=[img_input])
+
+                # ---------------- 输出预览（集中在左侧） ----------------
+                notification = gr.Text(
+                    label=LOCALES["notification"][DEFAULT_LANG]["label"], visible=False
+                )
+                with gr.Row():
+                    img_output_standard = gr.Image(
+                        label=LOCALES["standard_photo"][DEFAULT_LANG]["label"],
+                        height=350,
+                        format="png",
+                        show_download_button=True,
+                    )
+                    img_output_standard_hd = gr.Image(
+                        label=LOCALES["hd_photo"][DEFAULT_LANG]["label"],
+                        height=350,
+                        format="png",
+                        show_download_button=True,
+                    )
+                img_output_layout = gr.Image(
+                    label=LOCALES["layout_photo"][DEFAULT_LANG]["label"],
+                    height=350,
+                    format="png",
+                    show_download_button=True,
+                )
+                with gr.Accordion(
+                    LOCALES["template_photo"][DEFAULT_LANG]["label"], open=False
+                ) as template_image_accordion:
+                    img_output_template = gr.Gallery(
+                        label=LOCALES["template_photo"][DEFAULT_LANG]["label"],
+                        height=350,
+                        format="png",
+                    )
+                with gr.Accordion(
+                    LOCALES["matting_image"][DEFAULT_LANG]["label"], open=False
+                ) as matting_image_accordion:
+                    with gr.Row():
+                        img_output_standard_png = gr.Image(
+                            label=LOCALES["standard_photo_png"][DEFAULT_LANG]["label"],
+                            height=350,
+                            format="png",
+                            elem_id="standard_photo_png",
+                            show_download_button=True,
+                        )
+                        img_output_standard_hd_png = gr.Image(
+                            label=LOCALES["hd_photo_png"][DEFAULT_LANG]["label"],
+                            height=350,
+                            format="png",
+                            elem_id="hd_photo_png",
+                            show_download_button=True,
+                        )
 
             # ---------------- 右半边 UI ----------------
-            with gr.Column():
+            with gr.Column(scale=5, elem_id="right_panel"):
                 notification = gr.Text(
                     label=LOCALES["notification"][DEFAULT_LANG]["label"], visible=False
                 )
@@ -382,18 +467,21 @@ def create_ui(
                         label=LOCALES["standard_photo"][DEFAULT_LANG]["label"],
                         height=350,
                         format="png",
+                        visible=False,
                     )
                     # 高清照
                     img_output_standard_hd = gr.Image(
                         label=LOCALES["hd_photo"][DEFAULT_LANG]["label"],
                         height=350,
                         format="png",
+                        visible=False,
                     )
                 # 排版照
                 img_output_layout = gr.Image(
                     label=LOCALES["layout_photo"][DEFAULT_LANG]["label"],
                     height=350,
                     format="png",
+                    visible=False,
                 )
                 # 模版照片
                 with gr.Accordion(
@@ -638,6 +726,26 @@ def create_ui(
                     image_dpi_option, lang, "image_dpi", custom_image_dpi_size
                 )
 
+            # 预设尺寸（统一切换到自定义 px）
+            def set_preset(preset_name, lang):
+                choices = LOCALES["size_mode"][lang]["choices"]
+                custom_px_value = choices[2]
+                presets = {
+                    "one_inch": (413, 295),
+                    "two_inch": (579, 413),
+                    "us_passport": (600, 600),
+                    "jp_visa": (531, 413),
+                }
+                h, w = presets[preset_name]
+                return {
+                    mode_options: gr.update(value=custom_px_value),
+                    custom_size_height_px: gr.update(value=h),
+                    custom_size_width_px: gr.update(value=w),
+                    custom_size_px: gr.update(visible=True),
+                    custom_size_mm: gr.update(visible=False),
+                    size_list_row: gr.update(visible=False),
+                }
+
             # ---------------- 绑定事件 ----------------
             # 语言切换
             language_options.input(
@@ -689,6 +797,56 @@ def create_ui(
                     template_image_accordion,
                     print_parameter_tab,
                     print_options,
+                ],
+            )
+
+            # 绑定预设按钮
+            preset_one_inch.click(
+                set_preset,
+                inputs=[gr.State("one_inch"), language_options],
+                outputs=[
+                    mode_options,
+                    custom_size_height_px,
+                    custom_size_width_px,
+                    custom_size_px,
+                    custom_size_mm,
+                    size_list_row,
+                ],
+            )
+            preset_two_inch.click(
+                set_preset,
+                inputs=[gr.State("two_inch"), language_options],
+                outputs=[
+                    mode_options,
+                    custom_size_height_px,
+                    custom_size_width_px,
+                    custom_size_px,
+                    custom_size_mm,
+                    size_list_row,
+                ],
+            )
+            preset_us_passport.click(
+                set_preset,
+                inputs=[gr.State("us_passport"), language_options],
+                outputs=[
+                    mode_options,
+                    custom_size_height_px,
+                    custom_size_width_px,
+                    custom_size_px,
+                    custom_size_mm,
+                    size_list_row,
+                ],
+            )
+            preset_jp_visa.click(
+                set_preset,
+                inputs=[gr.State("jp_visa"), language_options],
+                outputs=[
+                    mode_options,
+                    custom_size_height_px,
+                    custom_size_width_px,
+                    custom_size_px,
+                    custom_size_mm,
+                    size_list_row,
                 ],
             )
 
@@ -776,6 +934,16 @@ def create_ui(
                     template_image_accordion,
                     notification,
                 ],
+            )
+
+            # 空状态提示控制
+            def on_image_change(img):
+                return gr.update(visible=img is None)
+
+            img_input.change(
+                on_image_change,
+                inputs=[img_input],
+                outputs=[empty_hint],
             )
 
     return demo

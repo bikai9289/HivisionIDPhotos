@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "us-passport-photo",
+    "title": "US Passport Photo Requirements (Size/Pixels/Background) | Make Online",
+    "h1": "US Passport Photo Requirements",
+    "subtitle": "2x2 inches (51x51 mm), white background",
+    "description": "Official US passport photo: 2x2 inches, head height 1 to 1 3/8 in, plain white background. Create and download online.",
+    "topic": "US Passport Photo",
+    "sections": [
+      {"heading": "Size & Pixels", "body": "2x2 in (51x51 mm); 300 DPI about 600-1200 px."},
+      {"heading": "Head Proportion", "body": "Head must be 50%-69% of the image height."},
+      {"heading": "Background & Lighting", "body": "Plain white background, even lighting, no heavy filters."}
+    ],
+    "tips": ["Click 'Create Now', choose white background and 2x2 in."]
+  },
+  {
+    "slug": "japan-visa-photo",
+    "title": "Japan Visa Photo Size & Requirements | Make Online",
+    "h1": "Japan Visa Photo Size",
+    "subtitle": "45x35 mm, light/white background",
+    "description": "Common size 45x35 mm, recent 6 months, white or light background. Auto crop and color change online.",
+    "topic": "Japan Visa Photo",
+    "sections": [
+      {"heading": "Size & Pixels", "body": "45x35 mm; ~531x413 px at 300 DPI."},
+      {"heading": "Background", "body": "White/light background, avoid shadows and glare."},
+      {"heading": "Expression", "body": "Neutral expression, face unobstructed."}
+    ]
+  },
+  {
+    "slug": "one-inch-photo",
+    "title": "1-inch ID Photo Size (px/mm) & Background | Online",
+    "h1": "1-inch ID Photo Size",
+    "subtitle": "25x35 mm, ~295x413 px at 300 DPI",
+    "description": "Standard 25x35 mm; choose white/red/blue backgrounds. Control DPI & file size.",
+    "topic": "1-inch ID Photo",
+    "sections": [
+      {"heading": "Conversion", "body": "25x35 mm is about 295x413 px at 300 DPI."},
+      {"heading": "Background", "body": "Common colors: white, red, blue; custom RGB/HEX supported."}
+    ]
+  },
+  {
+    "slug": "two-inch-photo",
+    "title": "2-inch ID Photo Size (px/mm) & Background | Online",
+    "h1": "2-inch ID Photo Size",
+    "subtitle": "35x49 mm, ~413x579 px at 300 DPI",
+    "description": "Standard 35x49 mm; one-click background change and 6-inch sheet layout.",
+    "topic": "2-inch ID Photo",
+    "sections": [
+      {"heading": "Conversion", "body": "35x49 mm is about 413x579 px at 300 DPI."},
+      {"heading": "Tips", "body": "Neutral expression, simple background, avoid shadows."}
+    ]
+  },
+  {
+    "slug": "change-background-white",
+    "title": "Change Photo Background to White (Online) | HivisionIDPhotos",
+    "h1": "Change Background to White",
+    "subtitle": "Auto matting, pure white background, one-click export",
+    "description": "Upload a photo, auto remove background and set to white; tweak DPI/KB and sharpening.",
+    "topic": "Change Background to White",
+    "sections": [
+      {"heading": "Compliance", "body": "Meets most ID/passport/visa requirements for white background."},
+      {"heading": "Steps", "body": "Upload -> 'Background only' -> White -> Export PNG/JPG."}
+    ]
+  },
+  {
+    "slug": "change-background-red",
+    "title": "Change Photo Background to Red (Online) | HivisionIDPhotos",
+    "h1": "Change Background to Red",
+    "subtitle": "Auto matting and red background; HEX supported",
+    "description": "Generate red background commonly used in resumes/ID; support HEX custom color.",
+    "topic": "Change Background to Red",
+    "sections": [
+      {"heading": "Color", "body": "Use pure #FF0000 or institution-specified red."},
+      {"heading": "Print", "body": "Use 6-inch layout for photo paper printing."}
+    ]
+  }
+]

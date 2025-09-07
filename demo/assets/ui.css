@@ -1,0 +1,22 @@
+/* Container width */
+.gradio-container { max-width: 1180px; margin: 0 auto; }
+
+/* Left/Right panels if elem_id present */
+#left_panel, #right_panel { gap: 12px; }
+
+/* Image blocks */
+#standard_photo_png, #hd_photo_png { background: #fff; border: 1px solid #eee; border-radius: 12px; }
+
+/* Primary action button sticky */
+#btn { position: sticky; bottom: 12px; z-index: 5; box-shadow: 0 6px 20px rgba(16,24,40,.08); }
+
+/* Tweak form spacing */
+.gradio-row, .gradio-column, .gr-form { gap: 10px; }
+
+/* Accordion look */
+.gr-accordion { border-radius: 12px; border: 1px solid #eee; background: #fff; }
+
+/* Examples gallery as cards */
+#examples_gallery { padding: 6px 0; }
+#examples_gallery img { width: 136px; height: 136px; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 14px rgba(16,24,40,.08); }
+#examples_gallery .gallery-item, #examples_gallery .image-container { padding: 6px; border: 1px solid #eee; border-radius: 14px; background: #fff; }
