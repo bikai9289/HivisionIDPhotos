@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx_certs:/etc/nginx/certs
+      - nginx_vhost:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+    restart: unless-stopped
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    environment:
+      # 使用你的邮箱接收证书到期通知
+      - DEFAULT_EMAIL=you@example.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx_certs:/etc/nginx/certs
+      - nginx_vhost:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+    depends_on:
+      - nginx-proxy
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python3 -u serve.py --host 0.0.0.0 --port 8000
+    environment:
+      - DEFAULT_LANG=en
+      - PUBLIC_SITE_URL=https://your-domain.com
+      # 供 nginx-proxy 与 acme-companion 识别
+      - VIRTUAL_HOST=your-domain.com
+      - LETSENCRYPT_HOST=your-domain.com
+      - VIRTUAL_PORT=8000
+    expose:
+      - "8000"
+    volumes:
+      - ./hivision/creator/weights:/app/hivision/creator/weights
+    restart: unless-stopped
+
+volumes:
+  nginx_certs:
+  nginx_vhost:
+  nginx_html:
+

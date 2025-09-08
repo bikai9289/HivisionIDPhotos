@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python3 -u serve.py --host 0.0.0.0 --port 8000
+    environment:
+      - DEFAULT_LANG=en
+      # 更换为你的对外访问域名（用于站点元信息/链接拼接）
+      - PUBLIC_SITE_URL=https://your-domain.com
+    expose:
+      - "8000"
+    volumes:
+      # 可选：将权重目录持久化/复用（建议先在宿主机执行下载脚本）
+      - ./hivision/creator/weights:/app/hivision/creator/weights
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
+

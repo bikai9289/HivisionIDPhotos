@@ -415,6 +415,142 @@ This repository is licensed under the [Apache-2.0 License](LICENSE).
 
 <br>
 
+# 🚀 生产部署（Docker + HTTPS）
+
+以下为“生产可用”的 docker-compose 方案，包含自动申请与续期证书。优先推荐 Caddy（配置极简），同时提供 Nginx+acme-companion 方案。
+
+注意事项
+- 服务入口为 `serve.py`，统一路由：`/` 和 `/en`（营销页）、`/tool`（Gradio 工具）、`/api`（后端接口）。
+- 第一次运行需要有抠图/检测模型权重，建议先在宿主机执行：`python scripts/download_model.py --models all`，然后把 `hivision/creator/weights` 目录挂载进容器。
+- 默认语言为英文，可用环境变量 `DEFAULT_LANG=zh` 切换为中文。
+
+方案 A：Caddy（推荐）
+1) 新建 `docker-compose.prod.yml`
+
+```
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python3 -u serve.py --host 0.0.0.0 --port 8000
+    environment:
+      - DEFAULT_LANG=en
+      # 替换为你的域名
+      - PUBLIC_SITE_URL=https://your-domain.com
+    expose:
+      - "8000"
+    volumes:
+      # 可选：将权重目录持久化/复用
+      - ./hivision/creator/weights:/app/hivision/creator/weights
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
+```
+
+2) 新建 `Caddyfile`
+
+```
+your-domain.com {
+  encode zstd gzip
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  }
+  reverse_proxy app:8000
+}
+```
+
+3) 启动步骤
+- 将 `your-domain.com` 替换为你的真实域名并设置 DNS A 记录到服务器 IP。
+- 首次启动：`docker compose -f docker-compose.prod.yml up -d --build`
+- 访问 `https://your-domain.com/` 和 `https://your-domain.com/tool/`。
+
+可选：把模型打包进镜像
+- 在 `Dockerfile` 中 `COPY . .` 之后加入：`RUN python3 scripts/download_model.py --models all`
+
+方案 B：Nginx + 自动证书（nginx-proxy + acme-companion）
+1) 新建 `docker-compose.nginx.yml`
+
+```
+version: "3.8"
+
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx_certs:/etc/nginx/certs
+      - nginx_vhost:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+    restart: unless-stopped
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    environment:
+      - DEFAULT_EMAIL=you@example.com  # 你的邮箱
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx_certs:/etc/nginx/certs
+      - nginx_vhost:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+    depends_on:
+      - nginx-proxy
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python3 -u serve.py --host 0.0.0.0 --port 8000
+    environment:
+      - DEFAULT_LANG=en
+      - PUBLIC_SITE_URL=https://your-domain.com
+      # 供 nginx-proxy 与 acme-companion 识别
+      - VIRTUAL_HOST=your-domain.com
+      - LETSENCRYPT_HOST=your-domain.com
+      - VIRTUAL_PORT=8000
+    expose:
+      - "8000"
+    volumes:
+      - ./hivision/creator/weights:/app/hivision/creator/weights
+    restart: unless-stopped
+
+volumes:
+  nginx_certs:
+  nginx_vhost:
+  nginx_html:
+```
+
+2) 启动步骤
+- 替换域名与邮箱，设置好 DNS。
+- 启动：`docker compose -f docker-compose.nginx.yml up -d --build`
+
+FAQ
+- 访问 `/tool` 静态资源 404？站点图片挂载在 `/site-assets`，避免与 Gradio 的 `/assets` 冲突。
+- 默认端口：反代监听 80/443，应用内部监听 8000，由反向代理转发。
+- 默认语言：英文。可用环境变量 `DEFAULT_LANG=zh` 切换为中文。
+- 首次下载模型慢：先在宿主机运行 `python scripts/download_model.py --models all`，把 `hivision/creator/weights` 挂载进容器。
+
 # 📚 引用
 
 如果您在研究或项目中使用了AI IDPhotos，请考虑引用我们的工作。您可以使用以下BibTeX条目：
@@ -486,3 +622,39 @@ This repository is licensed under the [Apache-2.0 License](LICENSE).
 [community-hivision-cpp]: https://github.com/zjkhahah/AI IDPhotos-cpp
 [community-hivision-windows-gui]: https://github.com/zhaoyun0071/AI IDPhotos-windows-GUI
 [community-hivision-nas]: https://github.com/ONG-Leo/AI IDPhotos-NAS
+
+
+已把部署文件落地到项目中，并按你要的一键启动方式组织好。
+
+新增文件
+
+docker-compose.prod.yml: Caddy 反代 + 自动证书（推荐）
+Caddyfile: Caddy 的虚拟主机配置
+docker-compose.nginx.yml: Nginx Proxy + acme-companion 自动证书方案
+一键验证启动（Caddy 推荐）
+
+替换域名
+打开 Caddyfile，将 your-domain.com 换成你的真实域名
+域名 DNS 添加 A 记录到服务器公网 IP
+准备模型权重（建议提前在宿主机执行）
+python scripts/download_model.py --models all
+这样 compose 会把 ./hivision/creator/weights 挂进去，首次启动更快
+启动服务
+docker compose -f docker-compose.prod.yml up -d --build
+访问
+https://你的域名/（首页）
+https://你的域名/tool/（工具页）
+一键验证启动（Nginx 备选方案）
+
+修改 docker-compose.nginx.yml
+替换 your-domain.com 与 DEFAULT_EMAIL
+配好域名 DNS
+启动
+docker compose -f docker-compose.nginx.yml up -d --build
+说明
+
+应用内部监听 8000 端口，反向代理负责 80/443 与证书。
+默认语言为英文；可用环境变量 DEFAULT_LANG=zh 切换。
+我们的站点图片挂在 /site-assets，避免与 Gradio 的 /assets 冲突。
+也可以把模型重量打包进镜像：在 Dockerfile 的 COPY . . 后加一行
+RUN python3 scripts/download_model.py --models all
