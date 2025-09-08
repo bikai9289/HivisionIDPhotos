@@ -4,8 +4,8 @@ from demo.locales import LOCALES
 
 
 def create_ui(processor, root_dir, human_matting_models, face_detect_models, language):
-    # Defaults
-    default_lang = language[0] if language else "zh"
+    # Defaults: prefer English if available
+    default_lang = "en" if (language and "en" in language) else (language[0] if language else "en")
     if os.environ.get("DEFAULT_LANG") in language:
         default_lang = os.environ.get("DEFAULT_LANG")
 
@@ -150,4 +150,3 @@ def create_ui(processor, root_dir, human_matting_models, face_detect_models, lan
         )
 
     return demo
-

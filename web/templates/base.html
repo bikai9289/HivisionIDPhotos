@@ -57,7 +57,13 @@
     <footer class="site-footer">
       <div class="container small">
         <div>© {{ now.year }} AI IDPhotos</div>
-        <div class="muted"><a href="/en">English</a></div>
+        <div class="muted">
+          {% if lang == 'en' %}
+            <a href="/zh">中文</a>
+          {% else %}
+            <a href="/en">English</a>
+          {% endif %}
+        </div>
       </div>
     </footer>
   </body>

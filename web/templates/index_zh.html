@@ -18,6 +18,39 @@
 </section>
 
 <main id="main" class="container" role="main">
+  <section aria-label="换底前后效果演示" style="margin:24px 0">
+    <div class="ba-slider" data-ba>
+      <div class="checkerboard"></div>
+      <!-- 左侧：换底前（原图） -->
+      <div class="ba-before" style="--pos:56">
+        <figure class="no-margin"><img src="/site-assets/gradio-image.jpeg" alt="原始图片" loading="eager" draggable="false" /></figure>
+      </div>
+      <!-- 右侧：换底后（抠图/换底） -->
+      <div class="ba-after">
+        <figure class="no-margin"><img src="/site-assets/harry.png" alt="处理后的图片" loading="eager" draggable="false" /></figure>
+      </div>
+      <div class="ba-dragger">
+        <label class="sr-only" for="ImageDraggerZH">拖动滑块查看对比</label>
+        <input id="ImageDraggerZH" name="ImageDraggerZH" type="range" step="0.1" min="0" max="100" value="56" />
+      </div>
+    </div>
+    <div class="small muted" style="text-align:center;margin-top:8px">左：换底前 · 右：换底后</div>
+    <script>
+      (function(){
+        var root = document.currentScript.previousElementSibling; // .ba-slider
+        if(!root || !root.querySelector) return;
+        var input = root.querySelector('input[type=range]');
+        var before = root.querySelector('.ba-before');
+        var update = function(v){
+          v = Math.max(0, Math.min(100, v));
+          before.style.clipPath = 'polygon(0% 0%, '+v+'% 0%, '+v+'% 100%, 0% 100%)';
+        };
+        update(input.value || 56);
+        input.addEventListener('input', function(e){ update(e.target.value); });
+        window.addEventListener('resize', function(){ update(input.value || 56); });
+      })();
+    </script>
+  </section>
   <section id="features" aria-label="功能亮点">
     <div class="grid">
       <div class="card"><h3>去背景/换底</h3><p>白/红/蓝/灰，支持自定义颜色（RGB/HEX）。</p></div>
@@ -69,4 +102,3 @@
   </section>
 </main>
 {% endblock %}
-

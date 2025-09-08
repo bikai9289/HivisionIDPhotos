@@ -32,26 +32,36 @@ def create_marketing_app() -> FastAPI:
     spec_cn_by_slug = {s.get("slug"): s for s in specs_cn if s.get("slug")}
     spec_en_by_slug = {s.get("slug"): s for s in specs_en if s.get("slug")}
 
-    # Static (optional placeholder)
+    # Static (site styles)
     static_dir = base_dir / "web" / "static"
     if static_dir.exists():
         app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+    # Public demo assets (images) — use a non-conflicting path since Gradio also serves 
+    # its frontend bundles at "/assets". We choose "/site-assets" for site images.
+    assets_dir = base_dir / "assets"
+    if assets_dir.exists():
+        app.mount("/site-assets", StaticFiles(directory=str(assets_dir)), name="site-assets")
 
-    # Home pages (Chinese default, with simple EN variant)
+    # Home: default to English, keep language-specific routes
     @app.get("/", response_class=HTMLResponse)
     async def home(request: Request):
+        return RedirectResponse(url="/en")
+
+    @app.get("/en", response_class=HTMLResponse)
+    async def home_en(request: Request):
         return templates.TemplateResponse(
-            "index_zh.html",
+            "index_en.html",
             {
                 "request": request,
                 "now": datetime.utcnow(),
             },
         )
 
-    @app.get("/en", response_class=HTMLResponse)
-    async def home_en(request: Request):
+    # Chinese home at /zh
+    @app.get("/zh", response_class=HTMLResponse)
+    async def home_zh(request: Request):
         return templates.TemplateResponse(
-            "index_en.html",
+            "index_zh.html",
             {
                 "request": request,
                 "now": datetime.utcnow(),
@@ -183,7 +193,7 @@ def build_app() -> FastAPI:
             root_dir,
             human_models,
             face_models,
-            ["zh", "en", "ko", "ja"],
+            ["en", "zh", "ko", "ja"],
         )
 
         # Prefer new helper if available; otherwise try legacy builders
@@ -235,14 +245,19 @@ app = build_app()
 
 if __name__ == "__main__":
     import uvicorn
+    import argparse
 
-    port = int(os.environ.get("PORT", "8000"))
-    # Fast dev reload: if RELOAD=1, use reload mode so code changes
-    # are picked up without rebuilding the Docker image or restarting.
-    reload = str(os.environ.get("RELOAD", "0")).lower() in ("1", "true", "yes")
-    if reload:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", default=os.environ.get("HOST", "0.0.0.0"))
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8000")))
+    parser.add_argument("--reload", action="store_true")
+    args = parser.parse_args()
+
+    # Fast dev reload: flag or env RELOAD=1
+    reload_flag = args.reload or (str(os.environ.get("RELOAD", "0")).lower() in ("1", "true", "yes"))
+    if reload_flag:
         uvicorn.run(
-            "serve:app", host="0.0.0.0", port=port, reload=True, reload_dirs=[os.path.dirname(__file__)]
+            "serve:app", host=args.host, port=args.port, reload=True, reload_dirs=[os.path.dirname(__file__)]
         )
     else:
-        uvicorn.run(app, host="0.0.0.0", port=port)
+        uvicorn.run(app, host=args.host, port=args.port)

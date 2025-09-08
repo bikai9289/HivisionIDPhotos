@@ -27,11 +27,10 @@ def create_ui(
     language: list,
 ):
 
-    # 加载环境变量DEFAULT_LANG, 如果有且在language中，则将DEFAULT_LANG设置为环境变�?
+    # 默认英文（若存在），可通过环境变量 DEFAULT_LANG 覆盖
+    DEFAULT_LANG = "en" if (language and "en" in language) else (language[0] if language else "en")
     if "DEFAULT_LANG" in os.environ and os.environ["DEFAULT_LANG"] in language:
         DEFAULT_LANG = os.environ["DEFAULT_LANG"]
-    else:
-        DEFAULT_LANG = language[0]
 
     DEFAULT_HUMAN_MATTING_MODEL = "modnet_photographic_portrait_matting"
     DEFAULT_FACE_DETECT_MODEL = "retinaface-resnet50"
@@ -379,12 +378,8 @@ def create_ui(
                     )
                 
 
-                img_but = gr.Button(
-                    LOCALES["button"][DEFAULT_LANG]["label"],
-                    elem_id="btn",
-                    variant="primary"
-                )
-
+                # 示例图片（点击自动填充并可自动生成）
+                gr.Markdown("### 示例图片（点击可一键填充）")
                 example_paths = [
                     path.as_posix()
                     for path in sorted(
@@ -395,15 +390,75 @@ def create_ui(
                     value=example_paths,
                     label="Examples",
                     columns=[5],
-                    height=160,
+                    height=180,
                     allow_preview=False,
                     elem_id="examples_gallery",
+                    visible=True,
                 )
                 
                 def gallery_select(evt):
                     return example_paths[evt.index]
+                # 选择示例图：先填充到输入框，再触发一次生成
+                select_evt = examples_gallery.select(gallery_select, outputs=[img_input])
 
-                examples_gallery.select(gallery_select, outputs=[img_input])
+                img_but = gr.Button(
+                    LOCALES["button"][DEFAULT_LANG]["label"],
+                    elem_id="btn",
+                    variant="primary"
+                )
+                # 点击示例后自动执行一次与“开始制作”相同的流程
+                select_evt.then(
+                    processor.process,
+                    inputs=[
+                        img_input,
+                        mode_options,
+                        size_list_options,
+                        color_options,
+                        render_options,
+                        image_kb_options,
+                        custom_color_R,
+                        custom_color_G,
+                        custom_color_B,
+                        custom_color_hex_value,
+                        custom_size_height_px,
+                        custom_size_width_px,
+                        custom_size_height_mm,
+                        custom_size_width_mm,
+                        custom_image_kb_size,
+                        language_options,
+                        matting_model_options,
+                        watermark_options,
+                        watermark_text_options,
+                        watermark_text_color,
+                        watermark_text_size,
+                        watermark_text_opacity,
+                        watermark_text_angle,
+                        watermark_text_space,
+                        face_detect_model_options,
+                        head_measure_ratio_option,
+                        top_distance_option,
+                        whitening_option,
+                        image_dpi_options,
+                        custom_image_dpi_size,
+                        brightness_option,
+                        contrast_option,
+                        sharpen_option,
+                        saturation_option,
+                        plugin_options,
+                        print_options,
+                    ],
+                    outputs=[
+                        img_output_standard,
+                        img_output_standard_hd,
+                        img_output_standard_png,
+                        img_output_standard_hd_png,
+                        img_output_layout,
+                        img_output_template,
+                        template_image_accordion,
+                        notification,
+                        result_panel,
+                    ],
+                )
 
 
             # ---------------- 右半�?UI ----------------
@@ -899,5 +954,12 @@ def create_ui(
                 inputs=[img_input],
                 outputs=[empty_hint],
             )
+
+            # 底部一键切换为中文
+            with gr.Row():
+                switch_zh = gr.Button("切换为中文", variant="secondary")
+            def _to_zh():
+                return "zh"
+            switch_zh.click(_to_zh, outputs=[language_options])
 
     return demo

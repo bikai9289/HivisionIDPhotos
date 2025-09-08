@@ -18,6 +18,41 @@
 </section>
 
 <main id="main" class="container" role="main">
+  <section aria-label="Before/After demo" style="margin:24px 0">
+    <div class="ba-slider" data-ba>
+      <div class="checkerboard"></div>
+      <!-- Left: before (original background) -->
+      <div class="ba-before" style="--pos:56">
+        <figure class="no-margin"><img src="/site-assets/gradio-image.jpeg" alt="Original image" loading="eager" draggable="false" /></figure>
+      </div>
+      <!-- Right: after (background removed/changed) -->
+      <div class="ba-after">
+        <figure class="no-margin"><img src="/site-assets/harry.png" alt="Processed image" loading="eager" draggable="false" /></figure>
+      </div>
+      <div class="ba-dragger">
+        <label class="sr-only" for="ImageDraggerEN">Drag to compare</label>
+        <input id="ImageDraggerEN" name="ImageDraggerEN" type="range" step="0.1" min="0" max="100" value="56" />
+      </div>
+    </div>
+    <div class="small muted" style="text-align:center;margin-top:8px">Left: before · Right: after</div>
+    <script>
+      (function(){
+        var root = document.currentScript.previousElementSibling; // .ba-slider
+        if(!root || !root.querySelector) return;
+        var input = root.querySelector('input[type=range]');
+        var before = root.querySelector('.ba-before');
+        var update = function(v){
+          v = Math.max(0, Math.min(100, v));
+          before.style.clipPath = 'polygon(0% 0%, '+v+'% 0%, '+v+'% 100%, 0% 100%)';
+        };
+        // init
+        update(input.value || 56);
+        input.addEventListener('input', function(e){ update(e.target.value); });
+        // Resize safety for Safari
+        window.addEventListener('resize', function(){ update(input.value || 56); });
+      })();
+    </script>
+  </section>
   <section id="features" aria-label="Features">
     <div class="grid">
       <div class="card"><h3>Background</h3><p>White/Red/Blue/Gray; custom RGB/HEX.</p></div>
