@@ -322,13 +322,18 @@ class IDPhotoProcessor:
     # 处理照片生成错误
     def _handle_photo_generation_error(self, language):
         """处理照片生成错误"""
-        return [gr.update(value=None) for _ in range(4)] + [
-            gr.update(visible=False),
-            gr.update(value=None),
-            gr.update(value=None),
+        return [
+            gr.update(value=None),  # standard
+            gr.update(value=None),  # hd
+            gr.update(value=None),  # standard_png
+            gr.update(value=None),  # hd_png
+            gr.update(visible=False),  # layout image hidden
+            gr.update(value=None),  # template gallery
+            gr.update(visible=False), # template accordion
             gr.update(
                 value=LOCALES["notification"][language]["face_error"], visible=True
             ),
+            gr.update(visible=True), # show panel to display error
         ]
 
     # 处理生成的照片
@@ -658,25 +663,36 @@ class IDPhotoProcessor:
         result_image_template_accordion_gr,
     ):    
         """创建响应"""
+        # 注意：右侧“标准/高清”两个输出组件初始为 visible=False。
+        # 这里需要显式将其设为可见，否则用户看不到生成结果，
+        # 会误以为“一寸照片没有生成”。
         response = [
-            result_image_standard,
-            result_image_hd,
+            gr.update(value=result_image_standard, visible=True),
+            gr.update(value=result_image_hd, visible=True),
             result_image_standard_png,
             result_image_hd_png,
             result_layout_image_gr,
             result_image_template_gr,
             result_image_template_accordion_gr,
-            gr.update(visible=False),
+            gr.update(visible=False),  # notification default hidden
+            gr.update(visible=True),   # 结果面板整体显示
         ]
 
         return response
 
     def _create_error_response(self, language):
         """创建错误响应"""
-        return [gr.update(value=None) for _ in range(4)] + [
-            None,
+        # 清空各输出，并显示通知，同时只展示结果面板用于提示
+        return [
+            gr.update(value=None),  # standard
+            gr.update(value=None),  # hd
+            gr.update(value=None),  # standard_png
+            gr.update(value=None),  # hd_png
+            None,                  # layout path
+            gr.update(value=None), # template gallery
+            gr.update(visible=False), # template accordion
             gr.update(
                 value=LOCALES["size_mode"][language]["custom_size_eror"], visible=True
             ),
-            None,
+            gr.update(visible=True),  # result panel
         ]

@@ -1,15 +1,15 @@
 {% set base_url = (request.headers.get('x-forwarded-proto', 'http') + '://' + request.headers.get('host')) %}
 {% extends "base.html" %}
 {% set lang = 'en' %}
-{% set title = 'AI ID Photo Maker (Background Remover) | HivisionIDPhotos' %}
+{% set title = 'AI ID Photo Maker (Background Remover) | AI IDPhotos' %}
 {% set description = 'Create ID/Passport photos online: auto background removal, white/red/blue background, smart crop, multi-country sizes, sheet layout.' %}
 {% set canonical = base_url + '/en' %}
 
 {% block body %}
 <section class="hero" id="top">
   <div class="container">
-    <h1>AI ID Photos: Remove background, change colors and fit sizes</h1>
-    <p class="lead">Minimal, fast, SEO‑friendly pages inspired by remove.bg.</p>
+    <h1>AI ID Photos: Create Your Perfect ID Photo</h1>
+    <p class="lead">Get your professional ID photo in seconds. Automatically remove background, change color, and crop to the perfect size.</p>
     <div class="hero-ctas">
       <a class="btn primary" href="/tool" aria-label="Open the editor">Get Started</a>
       <a class="btn ghost" href="#howto" aria-label="See how it works">How it works</a>

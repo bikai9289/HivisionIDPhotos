@@ -1,15 +1,15 @@
 {% set base_url = (request.headers.get('x-forwarded-proto', 'http') + '://' + request.headers.get('host')) %}
 {% extends "base.html" %}
 {% set lang = 'zh-CN' %}
-{% set title = 'AI证件照换底色与规格生成 | HivisionIDPhotos' %}
+{% set title = 'AI证件照换底色与规格生成 | AI IDPhotos' %}
 {% set description = '在线一键制作证件照：自动抠图、换白/红/蓝底，智能裁剪，支持多国/多机构规格与排版，隐私本地处理。' %}
 {% set canonical = base_url + '/' %}
 
 {% block body %}
 <section class="hero" id="top">
   <div class="container">
-    <h1>AI 证件照：一键抠图、换底色与合规尺寸</h1>
-    <p class="lead">参考 remove.bg 的极简体验与速度，输出可被搜索引擎收录的静态页面。</p>
+    <h1>AI 证件照：轻松制作您的完美证件照</h1>
+    <p class="lead">数秒内即可获得您的专业证件照。自动去除背景、更换颜色并裁剪至完美尺寸。</p>
     <div class="hero-ctas">
       <a class="btn primary" href="/tool" aria-label="开始使用工具">立即开始制作</a>
       <a class="btn ghost" href="#howto" aria-label="查看使用步骤">查看使用步骤</a>

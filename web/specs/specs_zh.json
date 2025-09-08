@@ -55,7 +55,7 @@
   },
   {
     "slug": "change-background-white",
-    "title": "证件照换白底（在线去背景）| HivisionIDPhotos",
+    "title": "证件照换白底（在线去背景）| AI IDPhotos",
     "h1": "证件照换白底",
     "subtitle": "自动抠图，纯白背景，一键导出",
     "description": "上传照片，自动抠图并换成白色背景；支持 DPI/KB、锐化与美白微调。",
@@ -67,7 +67,7 @@
   },
   {
     "slug": "change-background-red",
-    "title": "证件照换红底（在线去背景）| HivisionIDPhotos",
+    "title": "证件照换红底（在线去背景）| AI IDPhotos",
     "h1": "证件照换红底",
     "subtitle": "自动抠图与红底渲染，支持 HEX 自定义",
     "description": "常用于求职/证件照场景的红色背景，一键生成。支持 HEX 自定义偏红色。",

@@ -3,13 +3,13 @@ import pathlib
 from datetime import datetime
 
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, Response
+from fastapi.responses import HTMLResponse, PlainTextResponse, Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 
 def create_marketing_app() -> FastAPI:
-    app = FastAPI(title="HivisionIDPhotos Site")
+    app = FastAPI(title="AI IDPhotos Site")
 
     base_dir = pathlib.Path(__file__).parent
     templates = Jinja2Templates(directory=str(base_dir / "web" / "templates"))
@@ -149,7 +149,10 @@ def build_app() -> FastAPI:
     try:
         import gradio as gr
         from demo.processor import IDPhotoProcessor
-        from demo.ui import create_ui
+        try:
+            from demo.ui import create_ui  # preferred
+        except Exception:
+            from demo.ui2 import create_ui  # fallback lightweight UI
         from hivision.creator.choose_handler import HUMAN_MATTING_MODELS
 
         root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -183,17 +186,46 @@ def build_app() -> FastAPI:
             ["zh", "en", "ko", "ja"],
         )
 
-        # Prefer new helper if available
+        # Prefer new helper if available; otherwise try legacy builders
+        mounted = False
         try:
             from gradio.routes import mount_gradio_app  # type: ignore
 
             mount_gradio_app(app, blocks, path="/tool")
+            mounted = True
         except Exception:
-            # Fallback: ASGI app mounting
-            gradio_app = gr.routes.App.create_app(blocks)  # type: ignore
-            app.mount("/tool", gradio_app)
+            try:
+                gradio_app = gr.routes.App.create_app(blocks)  # type: ignore
+                app.mount("/tool", gradio_app)
+                mounted = True
+            except Exception:
+                mounted = False
+
+        # Final fallback: run Gradio on a side port and redirect /tool
+        if not mounted:
+            try:
+                tool_port = int(os.environ.get("GRADIO_TOOL_PORT", "7860"))
+                # prevent_thread_lock makes it non-blocking
+                blocks.queue().launch(
+                    server_name="0.0.0.0",
+                    server_port=tool_port,
+                    share=False,
+                    inbrowser=False,
+                    prevent_thread_lock=True,
+                )
+
+                @app.get("/tool")
+                async def tool_redirect(request: Request):  # type: ignore
+                    # Preserve current hostname, swap to the Gradio side-port
+                    host = request.headers.get("host", "127.0.0.1").split(":")[0]
+                    scheme = "https" if request.url.scheme == "https" else "http"
+                    return RedirectResponse(url=f"{scheme}://{host}:{tool_port}")
+
+                print("[serve] Mounted /tool via redirect to side-port", tool_port)
+            except Exception as e:
+                print(f"[serve] Skip mounting /tool: {e}")
     except Exception as e:
-        print(f"[serve] Skip mounting /tool: {e}")
+        print(f"[serve] Skip preparing gradio UI: {e}")
 
     return app
 
@@ -205,4 +237,12 @@ if __name__ == "__main__":
     import uvicorn
 
     port = int(os.environ.get("PORT", "8000"))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    # Fast dev reload: if RELOAD=1, use reload mode so code changes
+    # are picked up without rebuilding the Docker image or restarting.
+    reload = str(os.environ.get("RELOAD", "0")).lower() in ("1", "true", "yes")
+    if reload:
+        uvicorn.run(
+            "serve:app", host="0.0.0.0", port=port, reload=True, reload_dirs=[os.path.dirname(__file__)]
+        )
+    else:
+        uvicorn.run(app, host="0.0.0.0", port=port)

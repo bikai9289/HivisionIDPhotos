@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  hivision_idphotos:
+    environment:
+      - RELOAD=1
+    volumes:
+      - .:/app
+    # keep same command; serve.py will enable reload when RELOAD=1
+
+  hivision_idphotos_api:
+    volumes:
+      - .:/app

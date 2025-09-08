@@ -61,17 +61,17 @@ def main(models_to_download):
     # 模型权重的下载链接
     model_urls = {
         "hivision_modnet": {
-            "url": "https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/hivision_modnet.onnx",
+            "url": "https://github.com/Zeyi-Lin/AI IDPhotos/releases/download/pretrained-model/hivision_modnet.onnx",
             "format": "onnx",
             "location": "hivision/creator/weights",
         },
         "modnet_photographic_portrait_matting": {
-            "url": "https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/modnet_photographic_portrait_matting.onnx",
+            "url": "https://github.com/Zeyi-Lin/AI IDPhotos/releases/download/pretrained-model/modnet_photographic_portrait_matting.onnx",
             "format": "onnx",
             "location": "hivision/creator/weights",
         },
         # "mnn_hivision_modnet": {
-        #     "url": "https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/mnn_hivision_modnet.mnn",
+        #     "url": "https://github.com/Zeyi-Lin/AI IDPhotos/releases/download/pretrained-model/mnn_hivision_modnet.mnn",
         #     "format": "mnn",
         # },
         "rmbg-1.4": {
@@ -85,7 +85,7 @@ def main(models_to_download):
             "location": "hivision/creator/weights",
         },
         "retinaface-resnet50": {
-            "url": "https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/retinaface-resnet50.onnx",
+            "url": "https://github.com/Zeyi-Lin/AI IDPhotos/releases/download/pretrained-model/retinaface-resnet50.onnx",
             "format": "onnx",
             "location": "hivision/creator/retinaface/weights",
         },

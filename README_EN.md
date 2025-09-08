@@ -1,7 +1,7 @@
 <div align="center">
 
 <img alt="hivision_logo" src="assets/hivision_logo.png" width=120 height=120>
-<h1>HivisionIDPhoto</h1>
+<h1>AI IDPhoto</h1>
 
 English / [中文](README.md) / [日本語](README_JP.md) / [한국어](README_KO.md)
 
@@ -54,14 +54,14 @@ English / [中文](README.md) / [日本語](README_JP.md) / [한국어](README_K
 
 # 🤩 Recent Updates
 
-- Online Experience: [![SwanHub Demo](https://img.shields.io/static/v1?label=Demo&message=SwanHub%20Demo&color=blue)](https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo)、[![Spaces](https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue)](https://huggingface.co/spaces/TheEeeeLin/HivisionIDPhotos)、[![][modelscope-shield]][modelscope-link]、[![][compshare-shield]][compshare-link]
+- Online Experience: [![SwanHub Demo](https://img.shields.io/static/v1?label=Demo&message=SwanHub%20Demo&color=blue)](https://swanhub.co/ZeYiLin/AI IDPhotos/demo)、[![Spaces](https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue)](https://huggingface.co/spaces/TheEeeeLin/AI IDPhotos)、[![][modelscope-shield]][modelscope-link]、[![][compshare-shield]][compshare-link]
 
 - 2024.11.20: Gradio Demo adds **Print Layout** option, supports six-inch, five-inch, A4, 3R, and 4R layout sizes
 - 2024.11.16: API interface adds beauty effect parameter
 - 2024.09.24: API interface adds base64 image input option | Gradio Demo adds **Layout Photo Cropping Lines** feature
 - 2024.09.22: Gradio Demo adds **Beast Mode** and **DPI** parameter
 - 2024.09.18: Gradio Demo adds **Share Template Photos** feature and **American Style** background option
-- 2024.09.17: Gradio Demo adds **Custom Background Color-HEX Input** feature | **(Community Contribution) C++ Version** - [HivisionIDPhotos-cpp](https://github.com/zjkhahah/HivisionIDPhotos-cpp) contributed by [zjkhahah](https://github.com/zjkhahah)
+- 2024.09.17: Gradio Demo adds **Custom Background Color-HEX Input** feature | **(Community Contribution) C++ Version** - [AI IDPhotos-cpp](https://github.com/zjkhahah/AI IDPhotos-cpp) contributed by [zjkhahah](https://github.com/zjkhahah)
 - 2024.09.16: Gradio Demo adds **Face Rotation Alignment** feature, custom size input supports **millimeters**
 - 2024.09.14: Gradio Demo adds **Custom DPI** feature, adds Japanese and Korean support, adds **Adjust Brightness, Contrast, Sharpness** feature
 
@@ -71,11 +71,11 @@ English / [中文](README.md) / [日本語](README_JP.md) / [한국어](README_K
 
 > 🚀 Thank you for your interest in our work. You may also want to check out our other achievements in the field of image processing, feel free to reach out: zeyi.lin@swanhub.co.
 
-HivisionIDPhoto aims to develop a practical and systematic intelligent algorithm for producing ID photos.
+AI IDPhoto aims to develop a practical and systematic intelligent algorithm for producing ID photos.
 
 It utilizes a comprehensive AI model workflow to recognize various user photo-taking scenarios, perform matting, and generate ID photos.
 
-**HivisionIDPhoto can achieve:**
+**AI IDPhoto can achieve:**
 
 1. Lightweight matting (purely offline, fast inference with **CPU** only)
 2. Generate standard ID photos and six-inch layout photos based on different size specifications
@@ -89,29 +89,29 @@ It utilizes a comprehensive AI model workflow to recognize various user photo-ta
 
 ---
 
-If HivisionIDPhoto helps you, please star this repo or recommend it to your friends to solve the urgent ID photo production problem!
+If AI IDPhoto helps you, please star this repo or recommend it to your friends to solve the urgent ID photo production problem!
 
 <br>
 
 # 🏠 Community
 
-We have shared some interesting applications and extensions of HivisionIDPhotos built by the community:
+We have shared some interesting applications and extensions of AI IDPhotos built by the community:
 
-- [HivisionIDPhotos-ComfyUI](https://github.com/AIFSH/HivisionIDPhotos-ComfyUI): ComfyUI ID photo processing workflow built by [AIFSH](https://github.com/AIFSH/HivisionIDPhotos-ComfyUI) 
+- [AI IDPhotos-ComfyUI](https://github.com/AIFSH/AI IDPhotos-ComfyUI): ComfyUI ID photo processing workflow built by [AIFSH](https://github.com/AIFSH/AI IDPhotos-ComfyUI) 
 
-[<img src="assets/comfyui.png" width="900" alt="ComfyUI workflow">](https://github.com/AIFSH/HivisionIDPhotos-ComfyUI)
+[<img src="assets/comfyui.png" width="900" alt="ComfyUI workflow">](https://github.com/AIFSH/AI IDPhotos-ComfyUI)
 
-- [HivisionIDPhotos-wechat-weapp](https://github.com/no1xuan/HivisionIDPhotos-wechat-weapp): WeChat ID photo mini program, powered by the HivisionIDphotos algorithm, contributed by [no1xuan](https://github.com/no1xuan)
+- [AI IDPhotos-wechat-weapp](https://github.com/no1xuan/AI IDPhotos-wechat-weapp): WeChat ID photo mini program, powered by the AI IDPhotos algorithm, contributed by [no1xuan](https://github.com/no1xuan)
 
-[<img src="assets/community-wechat-miniprogram.png" width="900" alt="HivisionIDPhotos-wechat-weapp">](https://github.com/no1xuan/HivisionIDPhotos-wechat-weapp)
+[<img src="assets/community-wechat-miniprogram.png" width="900" alt="AI IDPhotos-wechat-weapp">](https://github.com/no1xuan/AI IDPhotos-wechat-weapp)
 
-- [HivisionIDPhotos-Uniapp](https://github.com/soulerror/HivisionIDPhotos-Uniapp): Front-end of WeChat ID photo mini program based on uniapp, powered by the HivisionIDphotos algorithm, contributed by [soulerror](https://github.com/soulerror)
+- [AI IDPhotos-Uniapp](https://github.com/soulerror/AI IDPhotos-Uniapp): Front-end of WeChat ID photo mini program based on uniapp, powered by the AI IDPhotos algorithm, contributed by [soulerror](https://github.com/soulerror)
 
-[<img src="assets/community-uniapp-wechat-miniprogram.png" width="900" alt="HivisionIDPhotos-uniapp">](https://github.com/soulerror/HivisionIDPhotos-Uniapp)
+[<img src="assets/community-uniapp-wechat-miniprogram.png" width="900" alt="AI IDPhotos-uniapp">](https://github.com/soulerror/AI IDPhotos-Uniapp)
 
-- [HivisionIDPhotos-cpp](https://github.com/zjkhahah/HivisionIDPhotos-cpp): C++ version of HivisionIDphotos, built by [zjkhahah](https://github.com/zjkhahah)
-- [HivisionIDPhotos-windows-GUI](https://github.com/zhaoyun0071/HivisionIDPhotos-windows-GUI): Windows client application built by [zhaoyun0071](https://github.com/zhaoyun0071)
-- [HivisionIDPhotos-NAS](https://github.com/ONG-Leo/HivisionIDPhotos-NAS): Chinese tutorial for Synology NAS deployment, contributed by [ONG-Leo](https://github.com/ONG-Leo)
+- [AI IDPhotos-cpp](https://github.com/zjkhahah/AI IDPhotos-cpp): C++ version of AI IDPhotos, built by [zjkhahah](https://github.com/zjkhahah)
+- [AI IDPhotos-windows-GUI](https://github.com/zhaoyun0071/AI IDPhotos-windows-GUI): Windows client application built by [zhaoyun0071](https://github.com/zhaoyun0071)
+- [AI IDPhotos-NAS](https://github.com/ONG-Leo/AI IDPhotos-NAS): Chinese tutorial for Synology NAS deployment, contributed by [ONG-Leo](https://github.com/ONG-Leo)
 
 <br>
 
@@ -124,8 +124,8 @@ Environment installation and dependencies:
 ## 1. Clone the Project
 
 ```bash
-git clone https://github.com/Zeyi-Lin/HivisionIDPhotos.git
-cd  HivisionIDPhotos
+git clone https://github.com/Zeyi-Lin/AI IDPhotos.git
+cd  AI IDPhotos
 ```
 
 ## 2. Install Dependency Environment
@@ -148,8 +148,8 @@ python scripts/download_model.py --models all
 **Method 2: Direct Download**
 
 Store in the project's `hivision/creator/weights` directory:
-- `modnet_photographic_portrait_matting.onnx` (24.7MB): Official weights of [MODNet](https://github.com/ZHKKKe/MODNet), [download](https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/modnet_photographic_portrait_matting.onnx)
-- `hivision_modnet.onnx` (24.7MB): Matting model with better adaptability for pure color background replacement, [download](https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/hivision_modnet.onnx)
+- `modnet_photographic_portrait_matting.onnx` (24.7MB): Official weights of [MODNet](https://github.com/ZHKKKe/MODNet), [download](https://github.com/Zeyi-Lin/AI IDPhotos/releases/download/pretrained-model/modnet_photographic_portrait_matting.onnx)
+- `hivision_modnet.onnx` (24.7MB): Matting model with better adaptability for pure color background replacement, [download](https://github.com/Zeyi-Lin/AI IDPhotos/releases/download/pretrained-model/hivision_modnet.onnx)
 - `rmbg-1.4.onnx` (176.2MB): Open-source matting model from [BRIA AI](https://huggingface.co/briaai/RMBG-1.4), [download](https://huggingface.co/briaai/RMBG-1.4/resolve/main/onnx/model.onnx?download=true) and rename to `rmbg-1.4.onnx`
 - `birefnet-v1-lite.onnx`(224MB): Open-source matting model from [ZhengPeng7](https://github.com/ZhengPeng7/BiRefNet), [download](https://github.com/ZhengPeng7/BiRefNet/releases/download/v1/BiRefNet-general-bb_swin_v1_tiny-epoch_232.onnx) and rename to `birefnet-v1-lite.onnx`
 
@@ -158,7 +158,7 @@ Store in the project's `hivision/creator/weights` directory:
 | Extended Face Detection Model | Description | Documentation |
 | -- | -- | -- |
 | MTCNN | **Offline** face detection model, high-performance CPU inference, default model, lower detection accuracy | Use it directly after cloning this project |
-| RetinaFace | **Offline** face detection model, moderate CPU inference speed (in seconds), and high accuracy | [Download](https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/retinaface-resnet50.onnx) and place it in the `hivision/creator/retinaface/weights` directory |
+| RetinaFace | **Offline** face detection model, moderate CPU inference speed (in seconds), and high accuracy | [Download](https://github.com/Zeyi-Lin/AI IDPhotos/releases/download/pretrained-model/retinaface-resnet50.onnx) and place it in the `hivision/creator/retinaface/weights` directory |
 | Face++ | Online face detection API launched by Megvii, higher detection accuracy, [official documentation](https://console.faceplusplus.com.cn/documents/4888373) | [Usage Documentation](docs/face++_EN.md)|
 
 ## 5. Performance Reference
@@ -404,8 +404,8 @@ If you have any questions, please email zeyi.lin@swanhub.co
 
 # Contributors
 
-<a href="https://github.com/Zeyi-Lin/HivisionIDPhotos/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Zeyi-Lin/HivisionIDPhotos" />
+<a href="https://github.com/Zeyi-Lin/AI IDPhotos/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Zeyi-Lin/AI IDPhotos" />
 </a>
 
 [Zeyi-Lin](https://github.com/Zeyi-Lin)、[SAKURA-CAT](https://github.com/SAKURA-CAT)、[Feudalman](https://github.com/Feudalman)、[swpfY](https://github.com/swpfY)、[Kaikaikaifang](https://github.com/Kaikaikaifang)、[ShaohonChen](https://github.com/ShaohonChen)、[KashiwaByte](https://github.com/KashiwaByte)
@@ -414,38 +414,38 @@ If you have any questions, please email zeyi.lin@swanhub.co
 
 # Thanks for support
 
-[![Stargazers repo roster for @Zeyi-Lin/HivisionIDPhotos](https://reporoster.com/stars/Zeyi-Lin/HivisionIDPhotos)](https://github.com/Zeyi-Lin/HivisionIDPhotos/stargazers)
+[![Stargazers repo roster for @Zeyi-Lin/AI IDPhotos](https://reporoster.com/stars/Zeyi-Lin/AI IDPhotos)](https://github.com/Zeyi-Lin/AI IDPhotos/stargazers)
 
-[![Forkers repo roster for @Zeyi-Lin/HivisionIDPhotos](https://reporoster.com/forks/Zeyi-Lin/HivisionIDPhotos)](https://github.com/Zeyi-Lin/HivisionIDPhotos/network/members)
+[![Forkers repo roster for @Zeyi-Lin/AI IDPhotos](https://reporoster.com/forks/Zeyi-Lin/AI IDPhotos)](https://github.com/Zeyi-Lin/AI IDPhotos/network/members)
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Zeyi-Lin/HivisionIDPhotos&type=Date)](https://star-history.com/#Zeyi-Lin/HivisionIDPhotos&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Zeyi-Lin/AI IDPhotos&type=Date)](https://star-history.com/#Zeyi-Lin/AI IDPhotos&Date)
 
 # Lincese
 
 This repository is licensed under the [Apache-2.0 License](LICENSE).
 
-[github-stars-shield]: https://img.shields.io/github/stars/zeyi-lin/hivisionidphotos?color=ffcb47&labelColor=black&style=flat-square
-[github-stars-link]: https://github.com/zeyi-lin/hivisionidphotos/stargazers
+[github-stars-shield]: https://img.shields.io/github/stars/zeyi-lin/aiidphotos?color=ffcb47&labelColor=black&style=flat-square
+[github-stars-link]: https://github.com/zeyi-lin/aiidphotos/stargazers
 
 [swanhub-demo-shield]: https://swanhub.co/git/repo/SwanHub%2FAuto-README/file/preview?ref=main&path=swanhub.svg
-[swanhub-demo-link]: https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo
+[swanhub-demo-link]: https://swanhub.co/ZeYiLin/AI IDPhotos/demo
 
 [spaces-shield]: https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue
-[spaces-link]: https://huggingface.co/spaces/TheEeeeLin/HivisionIDPhotos
+[spaces-link]: https://huggingface.co/spaces/TheEeeeLin/AI IDPhotos
 
 <!-- WeChat group link -->
 [wechat-shield]: https://img.shields.io/badge/WeChat-微信-4cb55e
 [wechat-link]: https://docs.qq.com/doc/DUkpBdk90eWZFS2JW
 
 <!-- Github Release -->
-[release-shield]: https://img.shields.io/github/v/release/zeyi-lin/hivisionidphotos?color=369eff&labelColor=black&logo=github&style=flat-square
-[release-link]: https://github.com/zeyi-lin/hivisionidphotos/releases
+[release-shield]: https://img.shields.io/github/v/release/zeyi-lin/aiidphotos?color=369eff&labelColor=black&logo=github&style=flat-square
+[release-link]: https://github.com/zeyi-lin/aiidphotos/releases
 
 [license-shield]: https://img.shields.io/badge/license-apache%202.0-white?labelColor=black&style=flat-square
-[license-link]: https://github.com/Zeyi-Lin/HivisionIDPhotos/blob/master/LICENSE
+[license-link]: https://github.com/Zeyi-Lin/AI IDPhotos/blob/master/LICENSE
 
-[github-issues-shield]: https://img.shields.io/github/issues/zeyi-lin/hivisionidphotos?color=ff80eb&labelColor=black&style=flat-square
-[github-issues-link]: https://github.com/zeyi-lin/hivisionidphotos/issues
+[github-issues-shield]: https://img.shields.io/github/issues/zeyi-lin/aiidphotos?color=ff80eb&labelColor=black&style=flat-square
+[github-issues-link]: https://github.com/zeyi-lin/aiidphotos/issues
 
 [dockerhub-shield]: https://img.shields.io/docker/v/linzeyi/hivision_idphotos?color=369eff&label=docker&labelColor=black&logoColor=white&style=flat-square
 [dockerhub-link]: https://hub.docker.com/r/linzeyi/hivision_idphotos/tags
@@ -456,18 +456,18 @@ This repository is licensed under the [Apache-2.0 License](LICENSE).
 [hellogithub-shield]: https://abroad.hellogithub.com/v1/widgets/recommend.svg?rid=8ea1457289fb4062ba661e5299e733d6&claim_uid=Oh5UaGjfrblg0yZ
 [hellogithub-link]: https://hellogithub.com/repository/8ea1457289fb4062ba661e5299e733d6
 
-[github-contributors-shield]: https://img.shields.io/github/contributors/zeyi-lin/hivisionidphotos?color=c4f042&labelColor=black&style=flat-square
-[github-contributors-link]: https://github.com/zeyi-lin/hivisionidphotos/graphs/contributors
+[github-contributors-shield]: https://img.shields.io/github/contributors/zeyi-lin/aiidphotos?color=c4f042&labelColor=black&style=flat-square
+[github-contributors-link]: https://github.com/zeyi-lin/aiidphotos/graphs/contributors
 
-[github-forks-shield]: https://img.shields.io/github/forks/zeyi-lin/hivisionidphotos?color=8ae8ff&labelColor=black&style=flat-square
-[github-forks-link]: https://github.com/zeyi-lin/hivisionidphotos/network/members
+[github-forks-shield]: https://img.shields.io/github/forks/zeyi-lin/aiidphotos?color=8ae8ff&labelColor=black&style=flat-square
+[github-forks-link]: https://github.com/zeyi-lin/aiidphotos/network/members
 
 [modelscope-shield]: https://img.shields.io/badge/Demo_on_ModelScope-purple?logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIzIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggaWQ9InN2Z18xNCIgZmlsbD0iIzYyNGFmZiIgZD0ibTAsODkuODRsMjUuNjUsMGwwLDI1LjY0OTk5bC0yNS42NSwwbDAsLTI1LjY0OTk5eiIvPgogIDxwYXRoIGlkPSJzdmdfMTUiIGZpbGw9IiM2MjRhZmYiIGQ9Im05OS4xNCwxMTUuNDlsMjUuNjUsMGwwLDI1LjY1bC0yNS42NSwwbDAsLTI1LjY1eiIvPgogIDxwYXRoIGlkPSJzdmdfMTYiIGZpbGw9IiM2MjRhZmYiIGQ9Im0xNzYuMDksMTQxLjE0bC0yNS42NDk5OSwwbDAsMjIuMTlsNDcuODQsMGwwLC00Ny44NGwtMjIuMTksMGwwLDI1LjY1eiIvPgogIDxwYXRoIGlkPSJzdmdfMTciIGZpbGw9IiMzNmNmZDEiIGQ9Im0xMjQuNzksODkuODRsMjUuNjUsMGwwLDI1LjY0OTk5bC0yNS42NSwwbDAsLTI1LjY0OTk5eiIvPgogIDxwYXRoIGlkPSJzdmdfMTgiIGZpbGw9IiMzNmNmZDEiIGQ9Im0wLDY0LjE5bDI1LjY1LDBsMCwyNS42NWwtMjUuNjUsMGwwLC0yNS42NXoiLz4KICA8cGF0aCBpZD0ic3ZnXzE5IiBmaWxsPSIjNjI0YWZmIiBkPSJtMTk4LjI4LDg5Ljg0bDI1LjY0OTk5LDBsMCwyNS42NDk5OWwtMjUuNjQ5OTksMGwwLC0yNS42NDk5OXoiLz4KICA8cGF0aCBpZD0ic3ZnXzIwIiBmaWxsPSIjMzZjZmQxIiBkPSJtMTk4LjI4LDY0LjE5bDI1LjY0OTk5LDBsMCwyNS42NWwtMjUuNjQ5OTksMGwwLC0yNS42NXoiLz4KICA8cGF0aCBpZD0ic3ZnXzIxIiBmaWxsPSIjNjI0YWZmIiBkPSJtMTUwLjQ0LDQybDAsMjIuMTlsMjUuNjQ5OTksMGwwLDI1LjY1bDIyLjE5LDBsMCwtNDcuODRsLTQ3Ljg0LDB6Ii8+CiAgPHBhdGggaWQ9InN2Z18yMiIgZmlsbD0iIzM2Y2ZkMSIgZD0ibTczLjQ5LDg5Ljg0bDI1LjY1LDBsMCwyNS42NDk5OWwtMjUuNjUsMGwwLC0yNS42NDk5OXoiLz4KICA8cGF0aCBpZD0ic3ZnXzIzIiBmaWxsPSIjNjI0YWZmIiBkPSJtNDcuODQsNjQuMTlsMjUuNjUsMGwwLC0yMi4xOWwtNDcuODQsMGwwLDQ3Ljg0bDIyLjE5LDBsMCwtMjUuNjV6Ii8+CiAgPHBhdGggaWQ9InN2Z18yNCIgZmlsbD0iIzYyNGFmZiIgZD0ibTQ3Ljg0LDExNS40OWwtMjIuMTksMGwwLDQ3Ljg0bDQ3Ljg0LDBsMCwtMjIuMTlsLTI1LjY1LDBsMCwtMjUuNjV6Ii8+CiA8L2c+Cjwvc3ZnPg==&labelColor=white
-[modelscope-link]: https://modelscope.cn/studios/SwanLab/HivisionIDPhotos
+[modelscope-link]: https://modelscope.cn/studios/SwanLab/AI IDPhotos
 
 
 [modelers-shield]: https://img.shields.io/badge/Demo_on_Modelers-c42a2a?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCAxMjQgNjQiIGZpbGw9Im5vbmUiPgo8cGF0aCBkPSJNNDIuNzc4MyAwSDI2LjU5NzdWMTUuNzc4N0g0Mi43NzgzVjBaIiBmaWxsPSIjREUwNDI5Ii8+CjxwYXRoIGQ9Ik0xNi41MDg4IDQuMTc5MkgwLjMyODEyNVYxOS45NTc5SDE2LjUwODhWNC4xNzkyWiIgZmlsbD0iIzI0NDk5QyIvPgo8cGF0aCBkPSJNMTIzLjk1MiA0LjE3OTJIMTA3Ljc3MVYxOS45NTc5SDEyMy45NTJWNC4xNzkyWiIgZmlsbD0iIzI0NDk5QyIvPgo8cGF0aCBkPSJNMTYuNTA4OCA0NS40NjE5SDAuMzI4MTI1VjYxLjI0MDZIMTYuNTA4OFY0NS40NjE5WiIgZmlsbD0iIzI0NDk5QyIvPgo8cGF0aCBkPSJNMTIzLjk1MiA0NS40NjE5SDEwNy43NzFWNjEuMjQwNkgxMjMuOTUyVjQ1LjQ2MTlaIiBmaWxsPSIjMjQ0OTlDIi8+CjxwYXRoIGQ9Ik0zMi43MDggMTUuNzc4OEgxNi41MjczVjMxLjU1NzVIMzIuNzA4VjE1Ljc3ODhaIiBmaWxsPSIjREUwNDI5Ii8+CjxwYXRoIGQ9Ik01Mi44NDg2IDE1Ljc3ODhIMzYuNjY4VjMxLjU1NzVINTIuODQ4NlYxNS43Nzg4WiIgZmlsbD0iI0RFMDQyOSIvPgo8cGF0aCBkPSJNOTcuNzIzNyAwSDgxLjU0M1YxNS43Nzg3SDk3LjcyMzdWMFoiIGZpbGw9IiNERTA0MjkiLz4KPHBhdGggZD0iTTg3LjY1MzQgMTUuNzc4OEg3MS40NzI3VjMxLjU1NzVIODcuNjUzNFYxNS43Nzg4WiIgZmlsbD0iI0RFMDQyOSIvPgo8cGF0aCBkPSJNMTA3Ljc5NCAxNS43Nzg4SDkxLjYxMzNWMzEuNTU3NUgxMDcuNzk0VjE1Ljc3ODhaIiBmaWxsPSIjREUwNDI5Ii8+CjxwYXRoIGQ9Ik0yNC42NzQ4IDMxLjU1NzZIOC40OTQxNFY0Ny4zMzYzSDI0LjY3NDhWMzEuNTU3NloiIGZpbGw9IiNERTA0MjkiLz4KPHBhdGggZD0iTTYwLjg3OTkgMzEuNTU3Nkg0NC42OTkyVjQ3LjMzNjNINjAuODc5OVYzMS41NTc2WiIgZmlsbD0iI0RFMDQyOSIvPgo8cGF0aCBkPSJNNzkuNjIwMSAzMS41NTc2SDYzLjQzOTVWNDcuMzM2M0g3OS42MjAxVjMxLjU1NzZaIiBmaWxsPSIjREUwNDI5Ii8+CjxwYXRoIGQ9Ik0xMTUuODI1IDMxLjU1NzZIOTkuNjQ0NVY0Ny4zMzYzSDExNS44MjVWMzEuNTU3NloiIGZpbGw9IiNERTA0MjkiLz4KPHBhdGggZD0iTTcwLjI1NDkgNDcuMzM1OUg1NC4wNzQyVjYzLjExNDdINzAuMjU0OVY0Ny4zMzU5WiIgZmlsbD0iI0RFMDQyOSIvPgo8L3N2Zz4=&labelColor=white
-[modelers-link]: https://modelers.cn/spaces/SwanLab/HivisionIDPhotos
+[modelers-link]: https://modelers.cn/spaces/SwanLab/AI IDPhotos
 
 [compshare-shield]: https://www-s.ucloud.cn/2025/02/dbef8b07ea3d316006d9c22765c3cd53_1740104342584.svg
-[compshare-link]: https://www.compshare.cn/images-detail?ImageID=compshareImage-17jacgm4ju16&ytag=HG_GPU_HivisionIDPhotos
+[compshare-link]: https://www.compshare.cn/images-detail?ImageID=compshareImage-17jacgm4ju16&ytag=HG_GPU_AI IDPhotos
