@@ -1,5 +1,9 @@
-# 将 your-domain.com 替换为你的真实域名，并将域名 A 记录指向服务器公网 IP
-your-domain.com {
+{
+  # 全局配置可选
+}
+
+# 将域名指向本服务器公网 IP，自动签发 TLS
+idphotos.pics {
   encode zstd gzip
   header {
     Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"

@@ -658,3 +658,43 @@ docker compose -f docker-compose.nginx.yml up -d --build
 我们的站点图片挂在 /site-assets，避免与 Gradio 的 /assets 冲突。
 也可以把模型重量打包进镜像：在 Dockerfile 的 COPY . . 后加一行
 RUN python3 scripts/download_model.py --models all
+
+
+
+已为你添加 GitHub Actions 工作流，并整理了 Dokploy 最小化部署参数清单。这样：推送到 master/main 分支后，Actions 会自动下载模型、构建镜像、推送 GHCR，并可选触发 Dokploy 自动发布。
+
+新增文件
+
+.github/workflows/ghcr-dokploy.yml
+触发：push 到 master/main，或手动 workflow_dispatch
+步骤：
+安装 Python 3.10，pip 安装 requests/tqdm
+运行 scripts/download_model.py --models all，把权重下载进仓库（Docker build 时被 COPY 进镜像）
+登录 GHCR，镜像名自动转为小写：ghcr.io/<owner>/<repo>
+推送 3 个 tag：latest、<branch>、<sha>
+可选：若设置了仓库机密 DOKPLOY_WEBHOOK_URL，最后一步会 curl 触发 Dokploy 应用的 Redeploy Hook
+你需要配置
+
+仓库 → Settings → Actions → General：Workflow permissions 选择 “Read and write permissions”
+仓库 → Settings → Secrets and variables → Actions：
+可选新建机密 DOKPLOY_WEBHOOK_URL（Dokploy 应用里的 Deployment Webhook URL），用于推送后自动发布
+首次运行将构建包含模型权重的镜像体积较大属正常
+Dokploy 最小化部署参数（镜像拉取方式）
+
+Provider: Docker
+Registry: GHCR（URL: https://ghcr.io；建议用 GitHub Token 或直接用默认 GITHUB_TOKEN 登录）
+Image: ghcr.io/<你的 GitHub 用户名>/<仓库名>:latest（全小写）
+Service Port: 8000
+Domains: 绑定你的域名（Dokploy/Traefik 自动签证书）
+Environment:
+DEFAULT_LANG=en
+PUBLIC_SITE_URL=https://你的域名
+可选 RUN_MODE=beast、FACE_PLUS_API_KEY/SECRET
+Volumes: 无需额外卷（镜像内已打包权重）。若想外部持久化，映射 /app/hivision/creator/weights
+Health check: GET / 或 /en
+工作流说明与可选优化
+
+已将模型权重在 CI 阶段下载进仓库并随镜像打包，容器启动即用，无需首启下载
+若想缩小镜像体积，可改为运行时挂载权重目录（不在 CI 下载），对应在 Dokploy 中挂载卷即可
+如需多环境（prod/staging）：可复制 workflow 并按分支/tag 生成不同 tag，Dokploy 选择对应 tag
+需要我把 Dokploy 的 Webhook 链接放入仓库机密，并在 README 里补充“CI 自动发布到 Dokploy”的步骤截图/文字吗？

@@ -111,32 +111,119 @@ Sitemap: {site}/sitemap.xml
 """
         return PlainTextResponse(content)
 
-    # sitemap.xml (basic; extend as pages grow)
+    # sitemap.xml (enhanced: i18n alternates, metadata)
     @app.get("/sitemap.xml")
     async def sitemap():
         site = os.environ.get("PUBLIC_SITE_URL", "http://localhost:8000").rstrip("/")
-        urls = ["/", "/en", "/tool"]
-        # Append spec pages
-        urls += [f"/spec/{s['slug']}" for s in specs_cn if s.get("slug")]
-        urls += [f"/en/spec/{s['slug']}" for s in specs_en if s.get("slug")]
-        lastmod = datetime.utcnow().strftime("%Y-%m-%d")
-        body = [
+        today = datetime.utcnow().strftime("%Y-%m-%d")
+
+        # Build entries with optional alternates
+        entries: list[dict] = []
+
+        # Home pages
+        entries.append(
+            {
+                "path": "/",
+                "lastmod": today,
+                "changefreq": "weekly",
+                "priority": "1.0",
+                "alternates": [
+                    {"hreflang": "en", "path": "/en"},
+                    {"hreflang": "zh-CN", "path": "/zh"},
+                ],
+            }
+        )
+        entries.append(
+            {
+                "path": "/en",
+                "lastmod": today,
+                "changefreq": "weekly",
+                "priority": "1.0",
+                "alternates": [
+                    {"hreflang": "en", "path": "/en"},
+                    {"hreflang": "zh-CN", "path": "/zh"},
+                ],
+            }
+        )
+        entries.append(
+            {
+                "path": "/zh",
+                "lastmod": today,
+                "changefreq": "weekly",
+                "priority": "1.0",
+                "alternates": [
+                    {"hreflang": "en", "path": "/en"},
+                    {"hreflang": "zh-CN", "path": "/zh"},
+                ],
+            }
+        )
+
+        # Tool page (editor)
+        entries.append(
+            {
+                "path": "/tool",
+                "lastmod": today,
+                "changefreq": "weekly",
+                "priority": "0.6",
+            }
+        )
+
+        # Spec pages (CN/EN), link alternates when both exist
+        cn_slugs = {s["slug"] for s in specs_cn if s.get("slug")}
+        en_slugs = {s["slug"] for s in specs_en if s.get("slug")}
+        all_slugs = sorted(cn_slugs.union(en_slugs))
+        for slug in all_slugs:
+            has_cn = slug in cn_slugs
+            has_en = slug in en_slugs
+            if has_cn:
+                entry = {
+                    "path": f"/spec/{slug}",
+                    "lastmod": today,
+                    "changefreq": "monthly",
+                    "priority": "0.7",
+                }
+                if has_en:
+                    entry["alternates"] = [
+                        {"hreflang": "zh-CN", "path": f"/spec/{slug}"},
+                        {"hreflang": "en", "path": f"/en/spec/{slug}"},
+                    ]
+                entries.append(entry)
+            if has_en:
+                entry = {
+                    "path": f"/en/spec/{slug}",
+                    "lastmod": today,
+                    "changefreq": "monthly",
+                    "priority": "0.7",
+                }
+                if has_cn:
+                    entry["alternates"] = [
+                        {"hreflang": "en", "path": f"/en/spec/{slug}"},
+                        {"hreflang": "zh-CN", "path": f"/spec/{slug}"},
+                    ]
+                entries.append(entry)
+
+        # Render XML
+        lines = [
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-            "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">",
+            "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">",
         ]
-        for u in urls:
-            body.extend(
-                [
-                    "  <url>",
-                    f"    <loc>{site}{u}</loc>",
-                    f"    <lastmod>{lastmod}</lastmod>",
-                    "    <changefreq>weekly</changefreq>",
-                    "    <priority>0.8</priority>",
-                    "  </url>",
-                ]
-            )
-        body.append("</urlset>")
-        xml = "\n".join(body)
+        for e in entries:
+            lines.append("  <url>")
+            lines.append(f"    <loc>{site}{e['path']}</loc>")
+            if e.get("lastmod"):
+                lines.append(f"    <lastmod>{e['lastmod']}</lastmod>")
+            if e.get("changefreq"):
+                lines.append(f"    <changefreq>{e['changefreq']}</changefreq>")
+            if e.get("priority"):
+                lines.append(f"    <priority>{e['priority']}</priority>")
+            for alt in e.get("alternates", []) or []:
+                lines.append(
+                    f"    <xhtml:link rel=\"alternate\" hreflang=\"{alt['hreflang']}\" href=\"{site}{alt['path']}\" />"
+                )
+            lines.append("  </url>")
+        lines.append("</urlset>")
+
+        xml = "\n".join(lines)
         return Response(content=xml, media_type="application/xml")
 
     return app

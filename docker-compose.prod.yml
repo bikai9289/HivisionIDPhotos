@@ -9,7 +9,7 @@ services:
     environment:
       - DEFAULT_LANG=en
       # 更换为你的对外访问域名（用于站点元信息/链接拼接）
-      - PUBLIC_SITE_URL=https://your-domain.com
+      - PUBLIC_SITE_URL=https://idphotos.pics
     expose:
       - "8000"
     volumes:
