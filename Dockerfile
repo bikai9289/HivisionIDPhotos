@@ -19,10 +19,22 @@ RUN pip install --no-cache-dir -r requirements.txt -r requirements-app.txt
 
 COPY . .
 
+# Optionally bake model weights into the image at build time.
+# By default, only download lightweight CPU-friendly models to keep image size smaller.
+# Build with: --build-arg DOWNLOAD_ALL_MODELS=true  to fetch all available models.
+ARG DOWNLOAD_ALL_MODELS=false
+RUN if [ "$DOWNLOAD_ALL_MODELS" = "true" ]; then \
+        python scripts/download_model.py --models all ; \
+    else \
+        python scripts/download_model.py --models hivision_modnet modnet_photographic_portrait_matting ; \
+    fi
+
 EXPOSE 8000
 EXPOSE 7860
 EXPOSE 8080
 
 # Unified server with SEO pages (/ , /en), API (/api) and Gradio (/tool)
 ENV PUBLIC_SITE_URL=""
-CMD ["python3", "-u", "serve.py"]
+
+# Ensure weights exist (idempotent) before starting the server
+CMD ["bash", "-lc", "python -u scripts/ensure_weights.py && python -u serve.py"]

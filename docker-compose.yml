@@ -9,9 +9,13 @@ services:
     #   - Home pages at /
     #   - Gradio tool at /tool
     #   - API mounted at /api
-    command: python3 -u serve.py
+    # Ensure weights on start, then run the unified server
+    command: bash -lc "python -u scripts/ensure_weights.py && python -u serve.py"
     ports:
       - '8000:8000'
+    # Persist or reuse weights to avoid re-downloading across container restarts
+    volumes:
+      - ./hivision/creator/weights:/app/hivision/creator/weights
 
   # Standalone API service (optional). The unified server above
   # already mounts the API at /api, but we keep this for compatibility.
@@ -19,6 +23,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python3 deploy_api.py
+    command: bash -lc "python -u scripts/ensure_weights.py && python -u deploy_api.py"
     ports:
       - '8080:8080'
