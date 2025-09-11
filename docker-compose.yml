@@ -12,7 +12,9 @@ services:
     # Ensure weights on start, then run the unified server
     command: bash -lc "python -u scripts/ensure_weights.py && python -u serve.py"
     ports:
-      - '8000:8000'
+      - '0.0.0.0:8000:8000'
+      - '0.0.0.0:80:8000'
+      - '0.0.0.0:7860:7860'
     # Persist or reuse weights to avoid re-downloading across container restarts
     volumes:
       - ./hivision/creator/weights:/app/hivision/creator/weights
