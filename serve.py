@@ -42,10 +42,27 @@ def create_marketing_app() -> FastAPI:
     if assets_dir.exists():
         app.mount("/site-assets", StaticFiles(directory=str(assets_dir)), name="site-assets")
 
-    # Home: default to English, keep language-specific routes
+    # Home: render default language directly (no redirect)
     @app.get("/", response_class=HTMLResponse)
     async def home(request: Request):
-        return RedirectResponse(url="/en")
+        # DEFAULT_LANG can be en/zh/ko/ja; default to English
+        default_lang = str(os.environ.get("DEFAULT_LANG", "en")).lower()
+        if default_lang.startswith("zh"):
+            return templates.TemplateResponse(
+                "index_zh.html",
+                {
+                    "request": request,
+                    "now": datetime.utcnow(),
+                },
+            )
+        else:
+            return templates.TemplateResponse(
+                "index_en.html",
+                {
+                    "request": request,
+                    "now": datetime.utcnow(),
+                },
+            )
 
     @app.get("/en", response_class=HTMLResponse)
     async def home_en(request: Request):
