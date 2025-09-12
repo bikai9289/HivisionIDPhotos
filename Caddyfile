@@ -1,13 +1,25 @@
 {
-  # 全局配置可选
+  # 全局配置：保持默认 ACME（Let's Encrypt）。
 }
 
-# 将域名指向本服务器公网 IP，自动签发 TLS
-idphotos.pics {
+# 同时支持根域与 www；自动签发证书并默认将 http 重定向到 https
+idphotos.pics, www.idphotos.pics {
   encode zstd gzip
   header {
     Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
   }
   reverse_proxy app:8000
 }
+
+# 如需强制 www -> 根域，可改为：
+# idphotos.pics {
+#   encode zstd gzip
+#   header {
+#     Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+#   }
+#   reverse_proxy app:8000
+# }
+# www.idphotos.pics {
+#   redir https://idphotos.pics{uri} permanent
+# }
 
