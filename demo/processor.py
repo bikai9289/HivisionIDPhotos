@@ -387,27 +387,24 @@ class IDPhotoProcessor:
             language,
         )
 
-        # 调整图片大小
-        output_image_path_dict = self._save_image(
+        # 保存到临时文件（用于下载等），但界面展示改为直接传数组，避免 /file= 路由问题
+        _ = self._save_image(
             result_image_standard,
             result_image_hd,
             result_image_layout,
             idphoto_json,
             format="jpeg" if idphoto_json["jpeg_format_option"] else "png",
         )
-        
-        # 返回
-        if result_image_layout is not None:
-            result_image_layout = output_image_path_dict["layout"]["path"]
-            
+
+        # 直接返回数组以便前端即时展示和下载，无需 /file=
         return self._create_response(
-            output_image_path_dict["standard"]["path"],
-            output_image_path_dict["hd"]["path"],
+            np.uint8(result_image_standard),
+            np.uint8(result_image_hd),
             result_image_standard_png,
             result_image_hd_png,
-            gr.update(value=result_image_layout, visible=result_image_layout_visible),
+            gr.update(value=(np.uint8(result_image_layout) if result_image_layout is not None else None), visible=result_image_layout_visible),
             gr.update(value=result_image_template, visible=result_image_template_visible),
-            gr.update(visible = result_image_template_visible),
+            gr.update(visible=result_image_template_visible),
         )
 
     # 渲染背景
