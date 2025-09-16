@@ -341,6 +341,15 @@ def build_app() -> FastAPI:
     except Exception as e:
         print(f"[serve] Skip preparing gradio UI: {e}")
 
+    # Compatibility shim for Gradio file endpoint when mounted under "/tool".
+    # Some Gradio frontends may still request files at root path like
+    #   GET /file=/tmp/xxx.png
+    # when the app is mounted at /tool. Provide a redirect so these requests
+    # are forwarded to the mounted path.
+    @app.get("/file={file_path:path}")
+    async def _redirect_gradio_file(file_path: str):  # type: ignore
+        return RedirectResponse(url=f"/tool/file={file_path}")
+
     return app
 
 
