@@ -350,6 +350,28 @@ def build_app() -> FastAPI:
     async def _redirect_gradio_file(file_path: str):  # type: ignore
         return RedirectResponse(url=f"/tool/file={file_path}")
 
+    # Redirect any bare gradio_api calls to the mounted path under /tool
+    @app.api_route("/gradio_api/{rest:path}", methods=["GET", "POST"])  # type: ignore
+    async def _redirect_gradio_api(rest: str, request: Request):
+        # Preserve query string
+        qs = ("?" + request.url.query) if request.url.query else ""
+        return RedirectResponse(url=f"/tool/gradio_api/{rest}{qs}")
+
+    # Minimal PWA manifest to avoid console 404 noise
+    @app.get("/manifest.json")
+    async def _manifest():
+        return Response(
+            content=(
+                '{"name":"AI IDPhotos","short_name":"IDPhotos","start_url":"/tool/","display":"standalone","icons":[]}'
+            ),
+            media_type="application/json",
+        )
+
+    # Quiet 404 for favicon
+    @app.get("/favicon.ico")
+    async def _favicon():
+        return Response(status_code=204)
+
     return app
 
 
