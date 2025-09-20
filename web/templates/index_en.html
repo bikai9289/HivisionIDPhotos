@@ -1,9 +1,10 @@
 {% set base_url = (request.headers.get('x-forwarded-proto', 'http') + '://' + request.headers.get('host')) %}
 {% extends "base.html" %}
 {% set lang = 'en' %}
-{% set title = 'AI ID Photo Maker (Background Remover) | AI IDPhotos' %}
+{% set title = 'AI IDPhotos: AI ID Photo Maker' %}
 {% set description = 'Create ID/Passport photos online: auto background removal, white/red/blue background, smart crop, multi-country sizes, sheet layout.' %}
-{% set canonical = base_url + '/en' %}
+{# Use the actual request path for canonical to avoid forcing /en #}
+{% set canonical = base_url + request.url.path %}
 
 {% block body %}
 <section class="hero" id="top">
@@ -23,7 +24,7 @@
       <div class="checkerboard"></div>
       <!-- Left: before (original background) -->
       <div class="ba-before" style="--pos:56">
-        <figure class="no-margin"><img src="/site-assets/gradio-image.jpeg" alt="Original image" loading="eager" draggable="false" /></figure>
+        <figure class="no-margin"><img src="/site-assets/harry.png" alt="Original image" loading="eager" draggable="false" /></figure>
       </div>
       <!-- Right: after (background removed/changed) -->
       <div class="ba-after">

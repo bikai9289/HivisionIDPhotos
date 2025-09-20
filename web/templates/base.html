@@ -6,8 +6,8 @@
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}" />
     <link rel="canonical" href="{{ canonical }}" />
-    <link rel="alternate" href="{{ base_url }}/" hreflang="zh-CN" />
-    <link rel="alternate" href="{{ base_url }}/en" hreflang="en" />
+    <link rel="alternate" href="{{ base_url }}/zh" hreflang="zh-CN" />
+    <link rel="alternate" href="{{ base_url }}/" hreflang="en" />
     <link rel="alternate" href="{{ base_url }}/" hreflang="x-default" />
 
     <!-- OpenGraph -->
@@ -44,10 +44,17 @@
       <div class="container row between center">
         <a class="brand" href="/" aria-label="AI IDPhotos Home">AI IDPhotos</a>
         <nav class="main-nav" aria-label="Primary">
-          <a href="/#features">功能</a>
-          <a href="/#howto">使用步骤</a>
-          <a href="/spec/one-inch-photo">规格尺寸</a>
-          <a class="btn ghost" href="/tool">开始使用</a>
+          {% if lang == 'en' %}
+            <a href="/#features">Features</a>
+            <a href="/#howto">How it works</a>
+            <a href="/en/spec/one-inch-photo">Size Specs</a>
+            <a class="btn ghost" href="/tool">Get Started</a>
+          {% else %}
+            <a href="/#features">功能</a>
+            <a href="/#howto">使用步骤</a>
+            <a href="/spec/one-inch-photo">规格尺寸</a>
+            <a class="btn ghost" href="/tool">开始使用</a>
+          {% endif %}
         </nav>
       </div>
     </header>
@@ -67,4 +74,5 @@
       </div>
     </footer>
   </body>
-</html>
+  </html>
+
