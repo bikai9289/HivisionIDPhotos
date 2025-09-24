@@ -41,6 +41,10 @@ def create_marketing_app() -> FastAPI:
     assets_dir = base_dir / "assets"
     if assets_dir.exists():
         app.mount("/site-assets", StaticFiles(directory=str(assets_dir)), name="site-assets")
+    logo_dir = base_dir / "logo"
+    if logo_dir.exists():
+        app.mount("/logo", StaticFiles(directory=str(logo_dir)), name="logo")
+
 
     # Home: render default language directly (no redirect)
     @app.get("/", response_class=HTMLResponse)
