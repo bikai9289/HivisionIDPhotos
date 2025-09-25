@@ -3,7 +3,7 @@ import pathlib
 from datetime import datetime
 
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, Response, RedirectResponse
+from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse, Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -36,7 +36,7 @@ def create_marketing_app() -> FastAPI:
     static_dir = base_dir / "web" / "static"
     if static_dir.exists():
         app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
-    # Public demo assets (images) â€” use a non-conflicting path since Gradio also serves 
+    # Public demo assets (images) â€?use a non-conflicting path since Gradio also serves 
     # its frontend bundles at "/assets". We choose "/site-assets" for site images.
     assets_dir = base_dir / "assets"
     if assets_dir.exists():
@@ -45,6 +45,14 @@ def create_marketing_app() -> FastAPI:
     if logo_dir.exists():
         app.mount("/logo", StaticFiles(directory=str(logo_dir)), name="logo")
 
+
+    @app.get("/google860540df1f459afe.html")
+    async def google_site_verification():
+        """Serve Google Search Console verification file."""
+        verification_file = base_dir / "google860540df1f459afe.html"
+        if verification_file.exists():
+            return FileResponse(str(verification_file), media_type="text/html")
+        return Response(status_code=404)
 
     # Home: render default language directly (no redirect)
     @app.get("/", response_class=HTMLResponse)
@@ -400,3 +408,4 @@ if __name__ == "__main__":
         )
     else:
         uvicorn.run(app, host=args.host, port=args.port)
+
