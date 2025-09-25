@@ -36,7 +36,7 @@ def create_marketing_app() -> FastAPI:
     static_dir = base_dir / "web" / "static"
     if static_dir.exists():
         app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
-    # Public demo assets (images) â€?use a non-conflicting path since Gradio also serves 
+    # Public demo assets (images) - use a non-conflicting path since Gradio also serves 
     # its frontend bundles at "/assets". We choose "/site-assets" for site images.
     assets_dir = base_dir / "assets"
     if assets_dir.exists():
