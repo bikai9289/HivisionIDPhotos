@@ -140,6 +140,16 @@ Sitemap: {site}/sitemap.xml
 """
         return PlainTextResponse(content)
 
+    @app.get("/sitemap", include_in_schema=False)
+    async def sitemap_redirect():
+        """Ensure bare /sitemap requests go to the XML payload."""
+        return RedirectResponse(url="/sitemap.xml", status_code=308)
+
+    @app.get("/sitemap_index.xml", include_in_schema=False)
+    async def sitemap_index_redirect():
+        """Provide a simple alias for sitemap index probes."""
+        return RedirectResponse(url="/sitemap.xml", status_code=308)
+
     # sitemap.xml (enhanced: i18n alternates, metadata)
     @app.get("/sitemap.xml")
     async def sitemap():
@@ -253,7 +263,7 @@ Sitemap: {site}/sitemap.xml
         lines.append("</urlset>")
 
         xml = "\n".join(lines)
-        return Response(content=xml, media_type="application/xml")
+        return Response(content=xml, media_type="application/xml; charset=utf-8")
 
     return app
 
