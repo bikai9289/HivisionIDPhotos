@@ -154,7 +154,7 @@ Sitemap: {site}/sitemap.xml
     @app.get("/sitemap.xml")
     async def sitemap():
         site = os.environ.get("PUBLIC_SITE_URL", "http://localhost:8000").rstrip("/")
-        today = datetime.utcnow().strftime("%Y-%m-%d")
+        generated_at = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # Build entries with optional alternates
         entries: list[dict] = []
@@ -163,7 +163,7 @@ Sitemap: {site}/sitemap.xml
         entries.append(
             {
                 "path": "/",
-                "lastmod": today,
+                "lastmod": generated_at,
                 "changefreq": "weekly",
                 "priority": "1.0",
                 "alternates": [
@@ -175,7 +175,7 @@ Sitemap: {site}/sitemap.xml
         entries.append(
             {
                 "path": "/en",
-                "lastmod": today,
+                "lastmod": generated_at,
                 "changefreq": "weekly",
                 "priority": "1.0",
                 "alternates": [
@@ -187,7 +187,7 @@ Sitemap: {site}/sitemap.xml
         entries.append(
             {
                 "path": "/zh",
-                "lastmod": today,
+                "lastmod": generated_at,
                 "changefreq": "weekly",
                 "priority": "1.0",
                 "alternates": [
@@ -201,7 +201,7 @@ Sitemap: {site}/sitemap.xml
         entries.append(
             {
                 "path": "/tool",
-                "lastmod": today,
+                "lastmod": generated_at,
                 "changefreq": "weekly",
                 "priority": "0.6",
             }
@@ -217,7 +217,7 @@ Sitemap: {site}/sitemap.xml
             if has_cn:
                 entry = {
                     "path": f"/spec/{slug}",
-                    "lastmod": today,
+                    "lastmod": generated_at,
                     "changefreq": "monthly",
                     "priority": "0.7",
                 }
@@ -230,7 +230,7 @@ Sitemap: {site}/sitemap.xml
             if has_en:
                 entry = {
                     "path": f"/en/spec/{slug}",
-                    "lastmod": today,
+                    "lastmod": generated_at,
                     "changefreq": "monthly",
                     "priority": "0.7",
                 }
@@ -242,9 +242,18 @@ Sitemap: {site}/sitemap.xml
                 entries.append(entry)
 
         # Render XML
+        namespace_pairs = [
+            ("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9"),
+            ("xmlns:xhtml", "http://www.w3.org/1999/xhtml"),
+            ("xmlns:image", "http://www.google.com/schemas/sitemap-image/1.1"),
+            ("xmlns:news", "http://www.google.com/schemas/sitemap-news/0.9"),
+            ("xmlns:mobile", "http://www.google.com/schemas/sitemap-mobile/1.0"),
+            ("xmlns:video", "http://www.google.com/schemas/sitemap-video/1.1"),
+        ]
+        namespace_attrs = " ".join(f'{key}="{value}"' for key, value in namespace_pairs)
         lines = [
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-            "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">",
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            f'<urlset {namespace_attrs}>',
         ]
         for e in entries:
             lines.append("  <url>")
