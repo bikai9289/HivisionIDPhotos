@@ -1,7 +1,9 @@
 {% set base_url = (request.headers.get('x-forwarded-proto', 'http') + '://' + request.headers.get('host')) %}
 {% set title = data.title %}
 {% set description = data.description %}
-{% if lang == 'en' %}
+{% if canonical_path is defined %}
+  {% set canonical = base_url + canonical_path %}
+{% elif lang == 'en' %}
   {% set canonical = base_url + '/en/spec/' + data.slug %}
 {% else %}
   {% set canonical = base_url + '/spec/' + data.slug %}

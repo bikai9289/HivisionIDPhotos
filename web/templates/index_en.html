@@ -3,8 +3,8 @@
 {% set lang = 'en' %}
 {% set title = 'AI IDPhotos: AI ID Photo Maker' %}
 {% set description = 'Create ID/Passport photos online: auto background removal, white/red/blue background, smart crop, multi-country sizes, sheet layout.' %}
-{# Use the actual request path for canonical to avoid forcing /en #}
-{% set canonical = base_url + request.url.path %}
+{% set canonical_path = canonical_path if canonical_path is defined else request.url.path %}
+{% set canonical = base_url + canonical_path %}
 
 {% block body %}
 <section class="hero" id="top">

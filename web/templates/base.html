@@ -6,9 +6,14 @@
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}" />
     <link rel="canonical" href="{{ canonical }}" />
-    <link rel="alternate" href="{{ base_url }}/zh" hreflang="zh-CN" />
-    <link rel="alternate" href="{{ base_url }}/" hreflang="en" />
-    <link rel="alternate" href="{{ base_url }}/" hreflang="x-default" />
+    {% set _alternates = alternates if alternates is defined else [] %}
+    {% for alt in _alternates %}
+      {% if alt.href is defined %}
+        <link rel="alternate" href="{{ alt.href }}" hreflang="{{ alt.hreflang }}" />
+      {% elif alt.path is defined %}
+        <link rel="alternate" href="{{ base_url ~ alt.path }}" hreflang="{{ alt.hreflang }}" />
+      {% endif %}
+    {% endfor %}
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />

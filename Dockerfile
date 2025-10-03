@@ -1,5 +1,10 @@
 FROM python:3.10-slim-bullseye
 
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONUTF8=1 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
 # 使用国内镜像源加速下载
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
     sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list

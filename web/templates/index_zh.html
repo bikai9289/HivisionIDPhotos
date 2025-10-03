@@ -3,7 +3,8 @@
 {% set lang = 'zh-CN' %}
 {% set title = 'AI证件照换底色与规格生成 | AI IDPhotos' %}
 {% set description = '在线一键制作证件照：自动抠图、换白/红/蓝底，智能裁剪，支持多国/多机构规格与排版，隐私本地处理。' %}
-{% set canonical = base_url + '/' %}
+{% set canonical_path = canonical_path if canonical_path is defined else request.url.path %}
+{% set canonical = base_url + canonical_path %}
 
 {% block body %}
 <section class="hero" id="top">

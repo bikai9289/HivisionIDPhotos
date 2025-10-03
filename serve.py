@@ -32,6 +32,21 @@ def create_marketing_app() -> FastAPI:
     spec_cn_by_slug = {s.get("slug"): s for s in specs_cn if s.get("slug")}
     spec_en_by_slug = {s.get("slug"): s for s in specs_en if s.get("slug")}
 
+    def build_language_alternates(
+        en_path: str | None = None,
+        zh_path: str | None = None,
+        x_default: str | None = None,
+    ) -> list[dict[str, str]]:
+        """Build hreflang alternate entries for templates."""
+        alternates: list[dict[str, str]] = []
+        if en_path:
+            alternates.append({"hreflang": "en", "path": en_path})
+        if zh_path:
+            alternates.append({"hreflang": "zh-CN", "path": zh_path})
+        if x_default:
+            alternates.append({"hreflang": "x-default", "path": x_default})
+        return alternates
+
     # Static (site styles)
     static_dir = base_dir / "web" / "static"
     if static_dir.exists():
@@ -46,7 +61,7 @@ def create_marketing_app() -> FastAPI:
         app.mount("/logo", StaticFiles(directory=str(logo_dir)), name="logo")
 
 
-    @app.get("/google860540df1f459afe.html")
+    @app.api_route("/google860540df1f459afe.html", methods=["GET", "HEAD"])
     async def google_site_verification():
         """Serve Google Search Console verification file."""
         verification_file = base_dir / "google860540df1f459afe.html"
@@ -55,54 +70,65 @@ def create_marketing_app() -> FastAPI:
         return Response(status_code=404)
 
     # Home: render default language directly (no redirect)
-    @app.get("/", response_class=HTMLResponse)
+    @app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
     async def home(request: Request):
         # DEFAULT_LANG can be en/zh/ko/ja; default to English
         default_lang = str(os.environ.get("DEFAULT_LANG", "en")).lower()
+        alternates = build_language_alternates(en_path="/", zh_path="/zh", x_default="/")
         if default_lang.startswith("zh"):
-            return templates.TemplateResponse(
-                "index_zh.html",
-                {
-                    "request": request,
-                    "now": datetime.utcnow(),
-                },
-            )
+            context = {
+                "request": request,
+                "now": datetime.utcnow(),
+                "alternates": alternates,
+                "canonical_path": "/zh",
+            }
+            template_name = "index_zh.html"
         else:
-            return templates.TemplateResponse(
-                "index_en.html",
-                {
-                    "request": request,
-                    "now": datetime.utcnow(),
-                },
-            )
+            context = {
+                "request": request,
+                "now": datetime.utcnow(),
+                "alternates": alternates,
+            }
+            template_name = "index_en.html"
+        return templates.TemplateResponse(template_name, context)
 
-    @app.get("/en", response_class=HTMLResponse)
+    @app.api_route("/en", methods=["GET", "HEAD"], response_class=HTMLResponse)
     async def home_en(request: Request):
         return templates.TemplateResponse(
             "index_en.html",
             {
                 "request": request,
                 "now": datetime.utcnow(),
+                "alternates": build_language_alternates(en_path="/", zh_path="/zh", x_default="/"),
+                "canonical_path": "/",
             },
         )
 
     # Chinese home at /zh
-    @app.get("/zh", response_class=HTMLResponse)
+    @app.api_route("/zh", methods=["GET", "HEAD"], response_class=HTMLResponse)
     async def home_zh(request: Request):
         return templates.TemplateResponse(
             "index_zh.html",
             {
                 "request": request,
                 "now": datetime.utcnow(),
+                "alternates": build_language_alternates(en_path="/", zh_path="/zh", x_default="/"),
+                "canonical_path": "/zh",
             },
         )
 
     # Programmatic spec pages: Chinese default
-    @app.get("/spec/{slug}", response_class=HTMLResponse)
+    @app.api_route("/spec/{slug}", methods=["GET", "HEAD"], response_class=HTMLResponse)
     async def spec_zh(request: Request, slug: str):
         data = spec_cn_by_slug.get(slug)
         if not data:
             return HTMLResponse("<h1>404</h1>", status_code=404)
+        has_en = slug in spec_en_by_slug
+        alternates = build_language_alternates(
+            en_path=f"/en/spec/{slug}" if has_en else None,
+            zh_path=f"/spec/{slug}",
+            x_default=f"/en/spec/{slug}" if has_en else f"/spec/{slug}",
+        )
         return templates.TemplateResponse(
             "spec.html",
             {
@@ -110,15 +136,23 @@ def create_marketing_app() -> FastAPI:
                 "now": datetime.utcnow(),
                 "lang": "zh-CN",
                 "data": data,
+                "alternates": alternates,
+                "canonical_path": f"/spec/{slug}",
             },
         )
 
     # Programmatic spec pages: English
-    @app.get("/en/spec/{slug}", response_class=HTMLResponse)
+    @app.api_route("/en/spec/{slug}", methods=["GET", "HEAD"], response_class=HTMLResponse)
     async def spec_en(request: Request, slug: str):
         data = spec_en_by_slug.get(slug)
         if not data:
             return HTMLResponse("<h1>404</h1>", status_code=404)
+        has_cn = slug in spec_cn_by_slug
+        alternates = build_language_alternates(
+            en_path=f"/en/spec/{slug}",
+            zh_path=f"/spec/{slug}" if has_cn else None,
+            x_default=f"/en/spec/{slug}",
+        )
         return templates.TemplateResponse(
             "spec.html",
             {
@@ -126,11 +160,13 @@ def create_marketing_app() -> FastAPI:
                 "now": datetime.utcnow(),
                 "lang": "en",
                 "data": data,
+                "alternates": alternates,
+                "canonical_path": f"/en/spec/{slug}",
             },
         )
 
     # robots.txt
-    @app.get("/robots.txt", response_class=PlainTextResponse)
+    @app.api_route("/robots.txt", methods=["GET", "HEAD"], response_class=PlainTextResponse)
     async def robots():
         site = os.environ.get("PUBLIC_SITE_URL", "http://localhost:8000").rstrip("/")
         content = f"""User-agent: *
@@ -140,18 +176,18 @@ Sitemap: {site}/sitemap.xml
 """
         return PlainTextResponse(content)
 
-    @app.get("/sitemap", include_in_schema=False)
+    @app.api_route("/sitemap", methods=["GET", "HEAD"], include_in_schema=False)
     async def sitemap_redirect():
         """Ensure bare /sitemap requests go to the XML payload."""
         return RedirectResponse(url="/sitemap.xml", status_code=308)
 
-    @app.get("/sitemap_index.xml", include_in_schema=False)
+    @app.api_route("/sitemap_index.xml", methods=["GET", "HEAD"], include_in_schema=False)
     async def sitemap_index_redirect():
         """Provide a simple alias for sitemap index probes."""
         return RedirectResponse(url="/sitemap.xml", status_code=308)
 
     # sitemap.xml (enhanced: i18n alternates, metadata)
-    @app.get("/sitemap.xml")
+    @app.api_route("/sitemap.xml", methods=["GET", "HEAD"])
     async def sitemap():
         site = os.environ.get("PUBLIC_SITE_URL", "http://localhost:8000").rstrip("/")
         generated_at = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -389,7 +425,7 @@ def build_app() -> FastAPI:
         return RedirectResponse(url=f"/tool/gradio_api/{rest}{qs}")
 
     # Minimal PWA manifest to avoid console 404 noise
-    @app.get("/manifest.json")
+    @app.api_route("/manifest.json", methods=["GET", "HEAD"])
     async def _manifest():
         return Response(
             content=(
@@ -399,7 +435,7 @@ def build_app() -> FastAPI:
         )
 
     # Quiet 404 for favicon
-    @app.get("/favicon.ico")
+    @app.api_route("/favicon.ico", methods=["GET", "HEAD"])
     async def _favicon():
         return Response(status_code=204)
 

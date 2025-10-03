@@ -1,29 +1,64 @@
-[
+﻿[
   {
     "slug": "us-passport-photo",
     "title": "US Passport Photo Requirements (Size/Pixels/Background) | Make Online",
     "h1": "US Passport Photo Requirements",
     "subtitle": "2x2 inches (51x51 mm), white background",
-    "description": "Official US passport photo: 2x2 inches, head height 1 to 1 3/8 in, plain white background. Create and download online.",
+    "description": "Official US passport photo: 2x2 in (51x51 mm), head height 1 to 1 3/8 in, pure white background, captured within the last 6 months.",
     "topic": "US Passport Photo",
     "sections": [
-      {"heading": "Size & Pixels", "body": "2x2 in (51x51 mm); 300 DPI about 600-1200 px."},
-      {"heading": "Head Proportion", "body": "Head must be 50%-69% of the image height."},
-      {"heading": "Background & Lighting", "body": "Plain white background, even lighting, no heavy filters."}
+      {
+        "heading": "Size & Canvas",
+        "body": "Final output must be exactly 2x2 in (51x51 mm). At 300 DPI this equals 600x600 px; the State Department also accepts up to 1200x1200 px if the proportions stay square."
+      },
+      {
+        "heading": "Head Placement",
+        "body": "From chin to crown the head should cover 50%-69% of the image height (roughly 25-35 mm). Keep both eyes visible, look straight at the camera, and maintain a neutral expression."
+      },
+      {
+        "heading": "Background, Lighting & Attire",
+        "body": "Use an evenly lit, shadow-free pure white background. Avoid uniforms or camouflage patterns; everyday clothing is recommended. Glasses are not allowed unless accompanied by a signed doctor statement."
+      },
+      {
+        "heading": "Digital File Checklist",
+        "body": "JPEG format, sRGB color space, file size between 54 KB and 10 MB. The photo must be in focus with no digital filters or over-retouching. Refer to the <a href=\"https://travel.state.gov/content/travel/en/passports/how-apply/photos.html\" rel=\"nofollow noopener\" target=\"_blank\">official guidance</a> for edge cases."
+      }
     ],
-    "tips": ["Click 'Create Now', choose white background and 2x2 in."]
+    "tips": [
+      "Choose the 2x2 in preset, enable auto crop, then use the alignment guides before exporting.",
+      "Turn on 'Background only' to quickly swap to pure white and adjust brightness if the face looks dull.",
+      "Need prints? Create a 6x4 inch layout and send it to a local photo lab for instant pickup."
+    ]
   },
   {
     "slug": "japan-visa-photo",
     "title": "Japan Visa Photo Size & Requirements | Make Online",
     "h1": "Japan Visa Photo Size",
     "subtitle": "45x35 mm, light/white background",
-    "description": "Common size 45x35 mm, recent 6 months, white or light background. Auto crop and color change online.",
+    "description": "Japan visa application photo: 45x35 mm, taken within 6 months, light or white background with clear facial features.",
     "topic": "Japan Visa Photo",
     "sections": [
-      {"heading": "Size & Pixels", "body": "45x35 mm; ~531x413 px at 300 DPI."},
-      {"heading": "Background", "body": "White/light background, avoid shadows and glare."},
-      {"heading": "Expression", "body": "Neutral expression, face unobstructed."}
+      {
+        "heading": "Dimensions & Resolution",
+        "body": "Target size is 45x35 mm. Exporting at 300 DPI yields about 531x413 px; online submissions commonly accept 600x470 px as well."
+      },
+      {
+        "heading": "Background & Lighting",
+        "body": "Choose a plain white or light blue background. Avoid shadows around the face and neck; softly diffused lighting prevents glare on the forehead and cheeks."
+      },
+      {
+        "heading": "Expression & Accessories",
+        "body": "Keep a neutral expression with mouth closed. Hair should not cover the eyebrows. Hats are not allowed and glasses are discouraged unless lenses are glare-free."
+      },
+      {
+        "heading": "Print Submission",
+        "body": "When submitting paper copies, trim the print precisely to 45x35 mm. Attach with double-sided tape instead of staples to protect the surface."
+      }
+    ],
+    "tips": [
+      "Select the 45x35 mm preset and use the 'Lighten background' slider if the original wall is slightly gray.",
+      "Enable face centering to automatically adjust eye-line height to the guideline zone.",
+      "Export both the single image and the 6x4 sheet—many visa centers request two identical copies."
     ]
   },
   {
@@ -31,11 +66,26 @@
     "title": "1-inch ID Photo Size (px/mm) & Background | Online",
     "h1": "1-inch ID Photo Size",
     "subtitle": "25x35 mm, ~295x413 px at 300 DPI",
-    "description": "Standard 25x35 mm; choose white/red/blue backgrounds. Control DPI & file size.",
+    "description": "Standard 1-inch ID photo (25x35 mm) used for exam registration, resumes, and work badges. Supports rapid background change and DPI/file-size control.",
     "topic": "1-inch ID Photo",
     "sections": [
-      {"heading": "Conversion", "body": "25x35 mm is about 295x413 px at 300 DPI."},
-      {"heading": "Background", "body": "Common colors: white, red, blue; custom RGB/HEX supported."}
+      {
+        "heading": "Pixel Conversion",
+        "body": "At 300 DPI the 25x35 mm canvas equals roughly 295x413 px. For online forms that cap file size, reduce DPI to 200 while keeping the aspect ratio."
+      },
+      {
+        "heading": "Common Use Cases",
+        "body": "China mainland exam systems (CET, postgraduate entrance), resume portals, and corporate HR systems frequently request the 1-inch format."
+      },
+      {
+        "heading": "Background Colors",
+        "body": "White is the safest choice, but red and blue are often required for school admissions. Use the HEX picker to match institution guidelines exactly."
+      }
+    ],
+    "tips": [
+      "Use 'Auto beautify' lightly (5-10%) to brighten skin without breaking official rules.",
+      "Tick 'Generate 6-inch sheet' to print multiple copies on one piece of photo paper.",
+      "For online uploads, set the target kilobyte limit in 'Export' to meet platform caps automatically."
     ]
   },
   {
@@ -43,11 +93,26 @@
     "title": "2-inch ID Photo Size (px/mm) & Background | Online",
     "h1": "2-inch ID Photo Size",
     "subtitle": "35x49 mm, ~413x579 px at 300 DPI",
-    "description": "Standard 35x49 mm; one-click background change and 6-inch sheet layout.",
+    "description": "2-inch (35x49 mm) ID photo widely used for passports, visas, and talent recruitment. Supports instant background swap and print-ready layouts.",
     "topic": "2-inch ID Photo",
     "sections": [
-      {"heading": "Conversion", "body": "35x49 mm is about 413x579 px at 300 DPI."},
-      {"heading": "Tips", "body": "Neutral expression, simple background, avoid shadows."}
+      {
+        "heading": "Dimensions",
+        "body": "35x49 mm corresponds to 413x579 px at 300 DPI. Keep the aspect ratio 7:5.88 when resizing to avoid cropping vital areas."
+      },
+      {
+        "heading": "Pose & Framing",
+        "body": "Stand or sit upright with shoulders visible and head centered. Maintain a gap between the crown and the top border for natural breathing room."
+      },
+      {
+        "heading": "Professional Presentation",
+        "body": "For interview or job portal use, choose a mid-tone background (blue or gray) and enable the sharpening slider below 20% to keep details crisp without halos."
+      }
+    ],
+    "tips": [
+      "If exporting for print kiosks, choose the built-in 300 DPI profile to avoid blurry enlargements.",
+      "Use 'Face alignment' + 'Manual adjust' if the chin sits outside the guideline range after auto crop.",
+      "Switch to the resume-ready preset in the sidebar to store frequently used color/size combinations."
     ]
   },
   {
@@ -55,11 +120,26 @@
     "title": "Change Photo Background to White (Online) | AI IDPhotos",
     "h1": "Change Background to White",
     "subtitle": "Auto matting, pure white background, one-click export",
-    "description": "Upload a photo, auto remove background and set to white; tweak DPI/KB and sharpening.",
+    "description": "Upload a portrait, remove the original background, and replace it with studio-grade white in seconds. Ideal for passports, visas, and corporate portals.",
     "topic": "Change Background to White",
     "sections": [
-      {"heading": "Compliance", "body": "Meets most ID/passport/visa requirements for white background."},
-      {"heading": "Steps", "body": "Upload -> 'Background only' -> White -> Export PNG/JPG."}
+      {
+        "heading": "When to Use",
+        "body": "White is the standard for most immigration, exam, and government IDs worldwide. A clean background avoids rejection caused by color casts or noise."
+      },
+      {
+        "heading": "Workflow",
+        "body": "Upload -> select 'Background only' -> choose white (#FFFFFF) -> tweak feathering and shadows -> export PNG/JPG at the required DPI."
+      },
+      {
+        "heading": "Quality Control",
+        "body": "Use the edge smoothing slider to eliminate jagged hairlines. The histogram preview helps keep skin tones natural after exposure adjustments."
+      }
+    ],
+    "tips": [
+      "If the subject wore white clothing, add a subtle gray vignette (3-5%) so shoulders stand out from the background.",
+      "Combine with the 'Portrait whitening' tool at low strength to retain texture without over-editing.",
+      "Save the output as PNG when further background edits are expected; choose JPG for small upload portals."
     ]
   },
   {
@@ -67,11 +147,26 @@
     "title": "Change Photo Background to Red (Online) | AI IDPhotos",
     "h1": "Change Background to Red",
     "subtitle": "Auto matting and red background; HEX supported",
-    "description": "Generate red background commonly used in resumes/ID; support HEX custom color.",
+    "description": "Generate a compliant red background (e.g., #FF0000 or #D60000) for resumes, graduation dossiers, and regional ID cards.",
     "topic": "Change Background to Red",
     "sections": [
-      {"heading": "Color", "body": "Use pure #FF0000 or institution-specified red."},
-      {"heading": "Print", "body": "Use 6-inch layout for photo paper printing."}
+      {
+        "heading": "Color Matching",
+        "body": "Select a precise HEX value or use the sampled color picker to match provincial or corporate specifications."
+      },
+      {
+        "heading": "Balance & Contrast",
+        "body": "Increase exposure slightly so the face does not look dim against the saturated red. The AI keeps hair edges clean while avoiding bleed."
+      },
+      {
+        "heading": "Printing",
+        "body": "After background replacement, enable the 6x4 layout and choose 'Borderless' when printing to maintain accurate margins."
+      }
+    ],
+    "tips": [
+      "Turn on anti-shadow to soften harsh neck shadows that become obvious on red.",
+      "Use the batch export script (CLI) if you need to convert multiple employee photos in one go.",
+      "Pair with the 2-inch preset for mainland talent introduction programs that explicitly ask for red backgrounds."
     ]
   }
 ]
